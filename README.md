@@ -2,9 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
-<b>About</b>
+<h2>About</h2>
 - This website allows users to create 'bots' using puppeteer as the plugin to 
   automate websites.
+
+
 
 ## Development server
 
@@ -17,6 +19,11 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+<h2>Commit</h2>
+- git add .
+- git commit -m "<--title-->"
+- git push
 
 ## Running unit tests
 
