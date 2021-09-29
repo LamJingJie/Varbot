@@ -2,7 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
-<h1>IMPORTANT</hi>
+<h1>IMPORTANT</h1>
+<table>
 <tr>
   <td>
     As of <b>29 September 2021</b> it is not possible to make a bot run on client side as an <b>error</b> will occur if you attempt to use
@@ -12,10 +13,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     Will come back to this project once there is a solution for this issue down the line.
   </td>
 </tr>
+</table>
 
 <br><br>
 
 <h1>TASKS</h1>
+<table>
 <tr>
   <td>
     Fix issue with the project node_modules not installing correctly
@@ -27,7 +30,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     Change to a sneaker bot website otherwise ecommerce bot (lazada, etc)
   </td>
 </tr>
-
+</table>
 <br><br>
 
 <h2>About</h2>
