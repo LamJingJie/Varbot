@@ -2,6 +2,34 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
+<h1>IMPORTANT</hi>
+<tr>
+  <td>
+    As of <b>29 September 2021</b> it is not possible to make a bot run on client side as an <b>error</b> will occur if you attempt to use
+    either the 'puppeteer', 'selenium' or 'protractor' plugin.
+  </td>
+  <td>
+    Will come back to this project once there is a solution for this issue down the line.
+  </td>
+</tr>
+
+<br><br>
+
+<h1>TASKS</h1>
+<tr>
+  <td>
+    Fix issue with the project node_modules not installing correctly
+  </td>
+  <td>
+    Install puppeteer on angular ts and test it out with 'eval' code
+  </td>
+  <td>
+    Change to a sneaker bot website otherwise ecommerce bot (lazada, etc)
+  </td>
+</tr>
+
+<br><br>
+
 <h2>About</h2>
 - This website allows users to create 'bots' using puppeteer as the plugin to 
   automate websites.

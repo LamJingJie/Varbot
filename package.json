@@ -19,9 +19,21 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "assert": "^2.0.0",
+    "browserify-zlib": "^0.2.0",
+    "constants-browserify": "^1.0.0",
     "firebase": "^9.0.2",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "puppeteer-extra": "^3.2.3",
+    "puppeteer-extra-plugin-angular": "^3.2.4",
+    "puppeteer-web": "^0.0.3",
     "rxjs": "~6.6.0",
+    "selenium-webdriver": "^4.0.0-beta.1",
+    "stream-browserify": "^3.0.0",
     "tslib": "^2.3.0",
+    "util": "^0.12.4",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -29,13 +41,21 @@
     "@angular/cli": "~12.2.6",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.20.25",
+    "@types/puppeteer": "^5.4.4",
+    "@types/selenium-webdriver": "^4.0.15",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "puppeteer": "^10.4.0",
     "typescript": "~4.3.5"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

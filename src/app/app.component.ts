@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import * as puppeteer from 'puppeteer';
+import { Builder, By, Key, until } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +12,8 @@ export class AppComponent {
   title = 'varbot';
   data12: any;
   constructor(private store: AngularFirestore){
+    
+    //puppeteer.use(require('puppeteer-extra-plugin-angular'));
     
     /*this.store.collection('test').valueChanges().subscribe(val =>{
       
@@ -29,5 +33,16 @@ export class AppComponent {
       console.log(this.data12.name);
     });
 
+  }
+
+  ngOnInit(){
+   // const browser = puppeteer.launch();
+  }
+
+  async testbtn(){
+    //let browser = await this.puppeteer.launch();
+    //let driver = await new Builder().forBrowser("chrome").build();
+    console.log("Test");
+    eval("console.log('hi its me!'); console.log('no its not me!');");
   }
 }
