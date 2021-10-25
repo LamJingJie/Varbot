@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import * as puppeteer from 'puppeteer';
 import { Builder, By, Key, until } from 'selenium-webdriver';
+import { BotsService } from './shared/bots.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ import { Builder, By, Key, until } from 'selenium-webdriver';
 export class AppComponent {
   title = 'varbot';
   data12: any;
-  constructor(private store: AngularFirestore){
+  bot_codes: string[] = ["await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});", "await page.waitForSelector('input[name=email]'); await page.$eval('input[name=email]', el => el.value = 'jingjie105@hotmail.com');", "await page.$eval('input[id=m_login_password]', el => el.value = 'Gendensuikoden12!');"];
+
+  constructor(private store: AngularFirestore, private botsService: BotsService){
     
     //puppeteer.use(require('puppeteer-extra-plugin-angular'));
     
@@ -39,10 +42,9 @@ export class AppComponent {
    // const browser = puppeteer.launch();
   }
 
-  async testbtn(){
-    //let browser = await this.puppeteer.launch();
-    //let driver = await new Builder().forBrowser("chrome").build();
-    console.log("Test");
-    eval("console.log('hi its me!'); console.log('no its not me!');");
+  botbtn(){
+    this.botsService.runBots(this.bot_codes).then((result: any)=>{
+      console.log(result);
+    });
   }
 }
