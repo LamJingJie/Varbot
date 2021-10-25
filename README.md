@@ -21,10 +21,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <table>
 <tr>
   <td>
-    Fix issue with the project node_modules not installing correctly
-  </td>
-  <td>
-    Install puppeteer on angular ts and test it out with 'eval' code
+    1. Design the webpage & ensure it is responsive
   </td>
   <td>
     Change to a sneaker bot website otherwise ecommerce bot (lazada, etc)
