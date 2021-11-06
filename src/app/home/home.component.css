@@ -1,0 +1,211 @@
+.section{
+
+    display: grid;
+    grid-template-rows: minmax(100vh, auto) minmax(100vh, auto) minmax(100vh, auto) minmax(30vh, auto);
+    height: 100%;
+    width: 100%;
+}
+
+/*clip-path: polygon(0px 0px, 100% 0px, 100% 80%, 0px 90%);*/
+
+.skew{
+    clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0px 90%);;
+    
+}
+
+
+.left{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.right{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.websiteimg{
+    position:absolute;
+    top:70%;
+    bottom:0;
+    left: 55%;
+    right: 0;
+    z-index: 1;
+
+    height: 75%;
+}
+
+.number_border{
+    border: 3px solid #59467D;
+    border-radius: 20%;
+    width: 5%;
+    padding:5px;
+}
+
+
+/*-----------------Starting Section---------------*/
+
+.starting_section{
+    background: linear-gradient(to right, #59467D 30%, #47BB8C);
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    color: white;
+    overflow: hidden;
+    z-index: 2;
+    
+}
+
+
+
+.title{
+    font-family: 'HYShortSamul';
+    font-size: 90px;
+    margin: auto;
+    padding-bottom: 3px;
+    border-bottom: 4px solid;
+}
+
+.aboutus{
+    margin: auto;
+    z-index: 2;
+}
+
+.aboutus_title, .aboutus_detail,.number1 {
+    font-family: 'Consolas';
+}
+.aboutus_title{
+    font-size: 40px;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.aboutus_detail{
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+
+.aboutus_btn{
+    display: flex;
+    justify-content: center;
+    font-family: 'HYShortSamul';
+    font-size: 25px;
+    margin: auto;
+
+    background: none;
+    border: 3px solid white;
+    border-radius: 30px;
+    color: white;
+    padding: 10px;
+}
+
+.aboutus_btn:hover{
+    animation-duration: 0.5s;
+    animation-name: changecolor;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    cursor: pointer;
+}
+
+@keyframes changecolor {
+    from {
+        color: white;
+        border: 3px solid white;
+    }
+  
+    to {
+        color: #59467D;
+        border: 3px solid #59467D;
+    }
+  }
+
+
+/*------------END---------*/
+
+
+/*-----------------URL Section---------------*/
+.url_section{
+    grid-column: 1;
+    grid-row: 2;
+    z-index: 2;
+    display: flex;
+}
+
+.number1{
+    font-size: 35px;
+    display:flex; 
+    justify-content: center; 
+    width: 100%; 
+    margin: auto;
+    font-style: normal;
+}
+
+.url_details{
+    padding-top: 15%;
+
+}
+
+.url_details_title{
+    display: flex;
+    justify-content: center;
+    font-family: 'Consolas';
+}
+
+.url_details_input{
+    border: 3px solid #59467D;
+    border-radius: 10px;
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    font-family: 'Consolas';
+}
+
+.url_details_btn{
+    padding: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.next_btn{
+    background: none;
+    border: 3px solid #59467D;
+    border-radius: 20px;
+    font-family: 'Consolas';
+    font-size: 20px;
+    padding: 25px;
+    padding-right: 35px;
+    padding-left: 35px;
+}
+
+.next_btn:hover{
+    background: #59467D;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+
+/*------------END---------*/
+
+/*-----------------Automate Section---------------*/
+
+.automate_section{
+    grid-column: 1;
+    grid-row: 3;
+}
+
+/*------------END---------*/
+
+/*-----------------Last Section---------------*/
+
+.last_section{
+    grid-column: 1;
+    grid-row: 4;
+}
+
+/*------------END---------*/
+
+

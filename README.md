@@ -39,7 +39,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve --proxy-config proxy.config.json` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -53,6 +53,10 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 - git add . <br>
 - git commit -m "<--title-->" <br>
 - git push
+
+## Start Server-side
+
+Run `npm start` to run the server-side. Navigate to `http://localhost:8080/`.
 
 ## Running unit tests
 
