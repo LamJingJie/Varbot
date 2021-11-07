@@ -27,14 +27,14 @@
 }
 
 .websiteimg{
-    position:absolute;
-    top:70%;
+    position:relative;
+    top:-25%;
     bottom:0;
-    left: 55%;
+    left: -1%;
     right: 0;
     z-index: 1;
-
-    height: 75%;
+    max-width: 100%;
+    height: auto;
 }
 
 .number_border{
