@@ -70,7 +70,6 @@
 
 .aboutus{
     margin: auto;
-    z-index: 2;
 }
 
 .aboutus_title, .aboutus_detail,.number1 {
@@ -89,7 +88,6 @@
 
 .aboutus_btn{
     display: flex;
-    justify-content: center;
     font-family: 'HYShortSamul';
     font-size: 25px;
     margin: auto;
@@ -144,7 +142,7 @@
 
 .url_details{
     padding-top: 15%;
-
+    margin: auto;
 }
 
 .url_details_title{
@@ -164,20 +162,19 @@
 
 .url_details_btn{
     padding: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 .next_btn{
+    display: flex;
+    margin: auto;
     background: none;
     border: 3px solid #59467D;
     border-radius: 20px;
     font-family: 'Consolas';
     font-size: 20px;
-    padding: 25px;
-    padding-right: 35px;
-    padding-left: 35px;
+    padding: 20px;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .next_btn:hover{
