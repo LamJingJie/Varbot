@@ -2,7 +2,7 @@
 
 <div class="section">
 
-    <div class="starting_section skew">
+    <div class="starting_section skew_right_to_left">
         <div class="left">
             <div class="title">
                 Varbot
@@ -20,20 +20,19 @@
                     Get Started...
                 </button>
             </div>       
-        </div>
-     
-        
-        
+        </div>   
     </div>
+
     
     <div class="url_section" style="padding-left: 20px;"> 
-        <div class="left" style="display: block; justify-content: flex-start;">
-            <div class="number_border"><p class="number1">1</p></div>
+        <div class="left" style="display: block;">
+            <div class="number_border"><p class="number">1</p></div>
             <div class="url_details">
                 <h2 class="url_details_title">Provide the Website URL</h2>
-                
+                <div style="display: flex; justify-content: center;">
                     <input placeholder="www.facebook.com" class="url_details_input"/>
-                
+                </div>
+                                  
                 <div class="url_details_btn">
                     <button class="next_btn">Next</button>
                 </div>
@@ -42,14 +41,100 @@
         </div>
         <div class="right">
             <img class="websiteimg" src="/assets/websiteimg.png" alt="image">
+        </div>       
+    </div>
+
+
+    <div  class="automate_section" style="padding-right: 20px;">      
+        <div class="left">
+            Left
+        </div>    
+        <div class="right"  style="display: block;">
+
+            <!--Tasks-->
+            <!--1. Change input shown depending on the btn selected-->
+            <!--2. Finish the 'automation steps' section-->
+            
+            <div class="automate_section_grid">
+                <div class="numbergrid">
+                    <div class="number_border" style="width: 48%;"><p class="number">2</p></div>  
+                </div>
+
+                <h2 class="automate_details_title">Addings Steps To Automation</h2>
+
+                <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code">
+                    <div style="padding-bottom: 30px; text-align: center;">
+                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='CLICK'">
+                            Clicking anything clickable.
+                        </span>
+                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='TXT'">
+                            Types on the input chosen.
+                        </span>
+                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='SS'">
+                            Screenshot current page.
+                        </span>
+                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='END'">
+                            Ends the automation bot.
+                        </span>
+                        <input *ngIf="selected_option === 'SS' || selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="E.g. input[name=email]" class="automate_details_input input_input" />
+                        <br><br>
+                        <input *ngIf="selected_option === 'SS'" placeholder="Screenshot path E.g. image.png" class="automate_details_input input_path" />
+                        <input *ngIf="selected_option === 'TXT'" placeholder="Input text E.g. Hello! It's me!" class="automate_details_input input_text" />
+                    </div>
+           
+                    <div class="automate_selection_grid" >
+                        <button id="selection_click"  value="CLICK" (click)="selection_btn('CLICK')">
+                            <div style="margin: auto;">
+                                Click
+                            </div>                        
+                        </button>
+                        <button id="selection_input"  value="TXT" (click)="selection_btn('TXT')">
+                            <div style="margin: auto;">
+                                Input
+                            </div>                        
+                        </button>
+                        <button id="selection_screenshot" value="SS" (click)="selection_btn('SS')">
+                            <div style="margin: auto;">
+                                ScreenShot
+                            </div>
+                        </button>
+                        <button id="selection_end"  value="END" (click)="selection_btn('END')">
+                            <div style="margin: auto;">
+                                End/Stop
+                            </div>
+                        </button>
+                    </div>
+                    <div style="padding-top: 10px;">
+                        <button type="submit" class="add_btn"><div style="margin: auto;">Add</div></button>     
+                    </div>                               
+                </form>
+
+                <div class="icons">
+                    <img class="icon" src="/assets/lightbulb_icon.png" alt="tips"/>
+                    <img class="icon" src="/assets/help_icon.png" alt="help"/>
+                </div>                
+            </div>           
+            
+            
         </div>
-        
     </div>
-    <div class="automate_section">          
-        Automate Section
-    </div>
-    <div class="last_section">           
-        Last Section
+    <div class="last_section skew_left_to_right">     
+        <div class="left" style="flex: 2; margin: auto; display: block; padding: 10px;">
+            <div style="color: white; padding: 5px;">Email Us</div>
+            <div class="email">
+                <textarea class="txt_area" rows="9" cols="50">
+
+                </textarea>
+                <div class="send">
+                    <button class="send_btn" (click)="send_email()">
+                        Send
+                    </button>                
+                </div>
+            </div>
+        </div>
+        <div class="right" style="padding-top: 70px;font-size: 110px; color: white; font-family: 'HYShortSamul'; margin: auto;">
+            Varbot
+        </div>      
     </div>
 
 
