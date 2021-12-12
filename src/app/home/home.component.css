@@ -1,7 +1,7 @@
 .section{
 
     display: grid;
-    grid-template-rows: minmax(100vh, auto) minmax(100vh, auto) minmax(100vh, auto) minmax(45vh, auto);
+    grid-template-rows: minmax(100vh, auto) minmax(70vh, auto) minmax(70vh, auto) minmax(30vh, auto);
     height: 100%;
     width: 100%;
 }
@@ -44,6 +44,14 @@
     z-index: 1;
     max-width: 100%;
     height: auto;
+}
+
+.websiteimg2{
+    position: relative;
+    z-index: 2;
+    max-width: 60%;
+    height: auto;
+    top: -85%;
 }
 
 .number_border{
@@ -139,6 +147,18 @@
     display: flex;
 }
 
+.url_section::after{
+    content: "";
+  position: absolute;
+  left: 0;
+  bottom: -80%;
+  z-index: -1;
+  width: 100%;
+  height: 10%;
+  background-color: #59467D;
+  clip-path: polygon(100% 10%, 0px 95%, 0px 91%, 100% 7%);
+}
+
 .number{
     font-size: 35px;
     display:flex; 
@@ -149,7 +169,7 @@
 }
 
 .url_details{
-    padding-top: 15%;
+    padding-top: 25%;
     margin: auto;
 }
 
@@ -204,8 +224,47 @@
     
 }
 
+
+
+.automation_step_title{
+    font-family: 'Consolas';
+    width: 100%;
+    display: flex;
+    margin: auto;
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+.playbtn{
+    height: 20px;
+    padding: 5px;
+}
+
+.playbtn:hover{
+    cursor: pointer;
+}
+
+.automation_step_details{
+    border: 2px solid #59467D;
+    border-radius: 40px;
+    height: 100%;
+    width: 100%;
+    grid-column: 1;
+    grid-row: 3;
+    padding: 15px;
+}
+
+.automation_steps{
+    box-sizing: border-box;
+    height:100%;
+    overflow-y: auto;
+}
+
 .automate_section_grid{
     width: 100%;
+    padding: 10px;
     display: grid;
     grid-template-columns: 1fr minmax(10%, 11%);
     grid-template-rows: minmax(auto, auto) minmax(auto, auto) minmax(auto, auto);

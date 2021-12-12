@@ -46,14 +46,50 @@
 
 
     <div  class="automate_section" style="padding-right: 20px;">      
-        <div class="left">
-            Left
+        <div class="left" style="display: block;">
+            <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
+                <h2 class="automation_step_title">Automation Steps <img class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
+                <div class="automation_step_details">
+                    <div class="automation_steps">
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                        #1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2#1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2#1 Go to 'www.facebook.com'
+                        <br><br>
+                        #2
+                    </div>
+                </div>
+            </div>
+            <img class="websiteimg2" alt="image" src="/assets/ai.png"/>
         </div>    
         <div class="right"  style="display: block;">
 
             <!--Tasks-->
-            <!--1. Change input shown depending on the btn selected-->
-            <!--2. Finish the 'automation steps' section-->
+            <!--1. Add the 'help' section-->
+            <!--2. Add the 'lightbulb' section-->
+            <!--3. Add some final touches to the design-->
             
             <div class="automate_section_grid">
                 <div class="numbergrid">
@@ -65,21 +101,21 @@
                 <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code">
                     <div style="padding-bottom: 30px; text-align: center;">
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='CLICK'">
-                            Clicking anything clickable.
+                            Bot to click on anything clickable.
                         </span>
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='TXT'">
-                            Types on the input chosen.
+                            Bot types on the input chosen.
                         </span>
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='SS'">
-                            Screenshot current page.
+                            Bot to screenshot current page.
                         </span>
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='END'">
                             Ends the automation bot.
                         </span>
-                        <input *ngIf="selected_option === 'SS' || selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="E.g. input[name=email]" class="automate_details_input input_input" />
+                        <input *ngIf="selected_option === 'SS' || selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the element you want to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
                         <br><br>
                         <input *ngIf="selected_option === 'SS'" placeholder="Screenshot path E.g. image.png" class="automate_details_input input_path" />
-                        <input *ngIf="selected_option === 'TXT'" placeholder="Input text E.g. Hello! It's me!" class="automate_details_input input_text" />
+                        <input *ngIf="selected_option === 'TXT'" placeholder="Input text E.g. 'Hello! It's me!'" class="automate_details_input input_text" />
                     </div>
            
                     <div class="automate_selection_grid" >
