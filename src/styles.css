@@ -7,6 +7,26 @@ html, body{
     width: 100%;
 }
 
+/*Chrome Scrollbar*/
+::-webkit-scrollbar{
+    width: 7px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-track{ 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background:#59467D; 
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #483966; 
+}
+
+
 /*
 ::ng-deep *{
     margin: 0;

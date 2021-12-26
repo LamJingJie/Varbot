@@ -87,18 +87,18 @@
         <div class="right"  style="display: block;">
 
             <!--Tasks-->
-            <!--1. Add the 'help' section-->
             <!--2. Add the 'lightbulb' section-->
             <!--3. Add some final touches to the design-->
+            <!--4. Refresh on the 'puppeteer' plugin codes-->
             
             <div class="automate_section_grid">
                 <div class="numbergrid">
-                    <div class="number_border" style="width: 48%;"><p class="number">2</p></div>  
+                    <div class="number_border" style="width: 100%;"><p class="number">2</p></div>  
                 </div>
 
                 <h2 class="automate_details_title">Addings Steps To Automation</h2>
 
-                <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code">
+                <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code()">
                     <div style="padding-bottom: 30px; text-align: center;">
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='CLICK'">
                             Bot to click on anything clickable.
@@ -112,29 +112,30 @@
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='END'">
                             Ends the automation bot.
                         </span>
-                        <input *ngIf="selected_option === 'SS' || selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the element you want to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
+
+                        <input formControlName="enter_input" *ngIf="selected_option === 'SS' || selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the code element to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
                         <br><br>
-                        <input *ngIf="selected_option === 'SS'" placeholder="Screenshot path E.g. image.png" class="automate_details_input input_path" />
-                        <input *ngIf="selected_option === 'TXT'" placeholder="Input text E.g. 'Hello! It's me!'" class="automate_details_input input_text" />
+                        <input formControlName="enter_path"  *ngIf="selected_option === 'SS'"  placeholder="Screenshot path E.g. image.png" class="automate_details_input input_path" />
+                        <input formControlName="enter_text" *ngIf="selected_option === 'TXT'"  placeholder="Input text E.g. 'Hello! It's me!'" class="automate_details_input input_text" />
                     </div>
            
                     <div class="automate_selection_grid" >
-                        <button id="selection_click"  value="CLICK" (click)="selection_btn('CLICK')">
+                        <button type="button" id="selection_click"  value="CLICK" (click)="selection_btn('CLICK')">
                             <div style="margin: auto;">
                                 Click
                             </div>                        
                         </button>
-                        <button id="selection_input"  value="TXT" (click)="selection_btn('TXT')">
+                        <button type="button" id="selection_input"  value="TXT" (click)="selection_btn('TXT')">
                             <div style="margin: auto;">
                                 Input
                             </div>                        
                         </button>
-                        <button id="selection_screenshot" value="SS" (click)="selection_btn('SS')">
+                        <button type="button" id="selection_screenshot" value="SS" (click)="selection_btn('SS')">
                             <div style="margin: auto;">
                                 ScreenShot
                             </div>
                         </button>
-                        <button id="selection_end"  value="END" (click)="selection_btn('END')">
+                        <button type="button" id="selection_end"  value="END" (click)="selection_btn('END')">
                             <div style="margin: auto;">
                                 End/Stop
                             </div>
@@ -147,7 +148,7 @@
 
                 <div class="icons">
                     <img class="icon" src="/assets/lightbulb_icon.png" alt="tips"/>
-                    <img class="icon" src="/assets/help_icon.png" alt="help"/>
+                    <img (click)="open(mymodal)" class="icon" src="/assets/help_icon.png" alt="help"/>
                 </div>                
             </div>           
             
@@ -172,7 +173,55 @@
             Varbot
         </div>      
     </div>
+    
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title"><button type="button" class="close" aria-label="Close"
+                    (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>Help
+            </h4>
+    
+        </div>
+        <div class="modal-body">
+            <div class="step1">Step #1:</div>
+            <div class="step2">Step #2:</div>
+            <div class="step3">Step #3:</div>
+            <div class="step4">Step #4:</div>
+            <div class="step5">Step #5:</div>
+            <div class="step6">Step #6:</div>
 
+            <div class="step1_info">
+                Select the 4 buttons (Click, Input, Screenshot & End).
+            </div>
+
+            <div class="step2_info">
+                Write down the line of the code of a section of a website that you wish the bot to focus on.
+                <br><br>
+                Example: I want to automate a clicking of a button in a website. 
+                <br><br>
+                I will first find the code (e.g. '< button class="btn">< /button>') of the button using the 'devtools' available on my browser.
+                <br><br>
+                In this case, I will then write 'button[class=btn]' in the input field.
+            </div>
+
+            <div class="step3_info">
+                Click on the 'Add' button.
+            </div>
+            <div class="step4_info">
+                Rinse and repeat those steps.
+            </div>
+            <div class="step5_info">
+                Once done, click on the 'End' button and then the 'Add' button below it.
+            </div>
+            <div class="step6_info">
+                Click on the 'play' icon on the left-side of the screen to run the bot.
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+        </div>
+    </ng-template>
 
     
 </div>
