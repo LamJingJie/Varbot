@@ -27,17 +27,16 @@
     <div class="url_section" style="padding-left: 20px;"> 
         <div class="left" style="display: block;">
             <div class="number_border"><p class="number">1</p></div>
-            <div class="url_details">
+            <form [formGroup]="url_section_form" class="url_details" (ngSubmit)="add_code_website(url_section_form.value)">
                 <h2 class="url_details_title">Provide the Website URL</h2>
                 <div style="display: flex; justify-content: center;">
-                    <input placeholder="www.facebook.com" class="url_details_input"/>
+                    <input formControlName="enter_website"  placeholder="https://www.facebook.com/" class="url_details_input" />
                 </div>
                                   
                 <div class="url_details_btn">
-                    <button class="next_btn">Next</button>
-                </div>
-                
-            </div>
+                    <button type="submit" class="next_btn">Next</button>
+                </div>              
+            </form>
         </div>
         <div class="right">
             <img class="websiteimg" src="/assets/websiteimg.png" alt="image">
@@ -87,9 +86,16 @@
         <div class="right"  style="display: block;">
 
             <!--Tasks-->
-            <!--2. Add the 'lightbulb' section-->
-            <!--3. Add some final touches to the design-->
-            <!--4. Refresh on the 'puppeteer' plugin codes-->
+            <!--Continue on the adding of the 'puppeteer' code for the 2nd section (*TMR*)-->
+            <!--0. Add popup/alert box to indicate stuff-->
+            <!--1. Implement the 'puppeteer' code and store it in a localstorage-->
+            <!--2. Add Login/Logout features-->
+            <!--3. Add Favourite feature-->
+            <!--4. Ensure that when a saved bot is loaded, it will show a red dot whenever it has been
+                    edited to remind users to save. And also a popup box warning them if they didn't-->
+            <!--2. Add the 'lightbulb' section (not important)-->
+            <!--3. Add some final touches to the design (not important)-->
+            
             
             <div class="automate_section_grid">
                 <div class="numbergrid">
@@ -98,7 +104,7 @@
 
                 <h2 class="automate_details_title">Addings Steps To Automation</h2>
 
-                <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code()">
+                <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code(automation_section_form.value)">
                     <div style="padding-bottom: 30px; text-align: center;">
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='CLICK'">
                             Bot to click on anything clickable.
@@ -113,13 +119,14 @@
                             Ends the automation bot.
                         </span>
 
-                        <input formControlName="enter_input" *ngIf="selected_option === 'SS' || selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the code element to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
-                        <br><br>
+                        <input formControlName="enter_input" *ngIf="selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the code element to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
+
                         <input formControlName="enter_path"  *ngIf="selected_option === 'SS'"  placeholder="Screenshot path E.g. image.png" class="automate_details_input input_path" />
+                        <br><br>
                         <input formControlName="enter_text" *ngIf="selected_option === 'TXT'"  placeholder="Input text E.g. 'Hello! It's me!'" class="automate_details_input input_text" />
                     </div>
            
-                    <div class="automate_selection_grid" >
+                    <div class="automate_selection_grid">
                         <button type="button" id="selection_click"  value="CLICK" (click)="selection_btn('CLICK')">
                             <div style="margin: auto;">
                                 Click
@@ -157,17 +164,7 @@
     </div>
     <div class="last_section skew_left_to_right">     
         <div class="left" style="flex: 2; margin: auto; display: block; padding: 10px;">
-            <div style="color: white; padding: 5px;">Email Us</div>
-            <div class="email">
-                <textarea class="txt_area" rows="9" cols="50">
-
-                </textarea>
-                <div class="send">
-                    <button class="send_btn" (click)="send_email()">
-                        Send
-                    </button>                
-                </div>
-            </div>
+            
         </div>
         <div class="right" style="padding-top: 70px;font-size: 110px; color: white; font-family: 'HYShortSamul'; margin: auto;">
             Varbot

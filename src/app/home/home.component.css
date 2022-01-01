@@ -52,7 +52,7 @@
     z-index: 2;
     max-width: 60%;
     height: auto;
-    top: -90%;
+    top: -87%;
 }
 
 .number_border{
@@ -441,38 +441,7 @@
 }
 
 
-.email{
-    display: flex;
-}
 
-.txt_area{
-    flex: 1;
-    background: transparent;
-    border: 2px solid #59467D;
-    border-radius: 15px;
-    padding: 5px;
-}
-.send{
-    margin: auto;
-    padding: 10px;
-}
-
-.send_btn{
-    font-family: 'HYShortSamul';
-    font-size: 18px;
-    background: transparent;
-    color: white;
-    border:2px solid #47BB8C;
-    border-radius: 50px;
-    padding: 11px;
-    padding-right: 30px;
-    padding-left: 30px;
-}
-
-.send_btn:hover{
-    background-color: #47BB8C;
-    cursor: pointer;
-}
 
 /*------------END---------*/
 

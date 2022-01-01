@@ -26,6 +26,10 @@ html, body{
     background: #483966; 
 }
 
+::-webkit-scrollbar-track-piece{
+    background: #cbcacc;
+}
+
 
 /*
 ::ng-deep *{
