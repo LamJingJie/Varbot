@@ -9,7 +9,7 @@ const chromeOptions = {
 
 async function bot(data_array){
     //eval();
-    //console.log(data_array);
+    console.log(data_array);
     //console.log(data_array.length);
 
     const browser = await puppeteer.launch(chromeOptions);

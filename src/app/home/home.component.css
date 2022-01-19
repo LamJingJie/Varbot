@@ -50,9 +50,9 @@
 .websiteimg2{
     position: relative;
     z-index: 2;
-    max-width: 60%;
+    max-width: 55%;
     height: auto;
-    top: -87%;
+    top: -90%;
 }
 
 .number_border{
@@ -531,4 +531,6 @@
     height: 80%;
     overflow-y: auto;
 }
+
+
 

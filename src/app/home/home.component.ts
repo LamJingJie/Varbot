@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { BotsService } from '../shared/bots.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
   bot_codes: string[] = [];
   //bot_codes: string[] = ["await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});", "await page.waitForSelector('input[name=email]'); await page.$eval('input[name=email]', el => el.value = 'jingjie105@hotmail.com');", "await page.$eval('input[id=m_login_password]', el => el.value = 'Gendensuikoden12!');"];
 
-  constructor( private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
+  constructor(private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
     backdropClass:'customBackdrop'
   }}
 
@@ -94,40 +95,69 @@ export class HomeComponent implements OnInit {
   //Section 1
   add_code_website(val: any){
     //console.log(val['enter_website']);
-
-    if(this.bot_codes.length >= 1){
-      console.log("Website edited");
-    }
     
-    if(val['enter_website'] == null || val['enter_website'] == ""){
-      console.log("Empty input field");
+    if(val['enter_website'] === null || val['enter_website'] === ""){
+      this.popup_msg("Empty input field");
       return
     }
     let url: any;
     try {
       url = new URL(val['enter_website']);
     } catch (error) {
-      console.log("Ensure that you copy the website exactly from its url.")
+      this.popup_msg("Invalid website url.")
       return
     }
    //"await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});"
     //console.log(url.hostname);
-    let code = "page.goto(" + "'" + url.hostname + "'" + ", {waitUntil: 'networkidle0',});";
+    let code = "await page.goto(" + '"' + url.href + '"' + ", {waitUntil: 'networkidle0',});";
     //console.log(code);
+    console.log(url.href);
+    console.log(code);
     this.bot_codes[0] = code;
     console.log(this.bot_codes);
-    
-    
+    this.botService.runBots(this.bot_codes).then((result: any)=>{
+      console.log(result);
+    });
+     
   }
 
   //Section 2
   add_code(val: any){
-    console.log(val['enter_input']);
+    console.log(val);
     //console.log(this.selected_option);
-  }
-
-  Test(){
-    console.log("HIIII")
+    if(this.bot_codes.length <= 0){
+      this.popup_msg("Please provide the WEBSITE URL to continue.");
+      return
+    }
+    if(this.selected_option==="CLICK"){
+      //bot code
+      let waitForSelector = "await page.waitForSelector(" + '"' + val['enter_input'] + '"' + ");";
+      let click = "await page.click(" + '"' + val['enter_input'] + '"' + ");"
+      console.log(waitForSelector);
+      console.log(click);
+      return;
+    }
+    if(this.selected_option==="TXT"){
+      //bot code
+      let waitForSelector = "await page.waitForSelector(" + '"' + val['enter_input'] + '"' + ");";
+      let eval_var = "await page.$eval(" + '"' + val['enter_input'] + '", el => el.value = ' + '"' + val['enter_text'] + '"' + ");"
+      console.log(waitForSelector);
+      console.log(eval_var);
+      return
+    }
+    if(this.selected_option==="SS"){
+      //bot code
+      let screenshot = "await page.screenshot({path: " + '"' + val['enter_path'] + '"}' + ");";
+      console.log(screenshot);
+      
+      return
+    }
+    if(this.selected_option==="END"){
+      //bot code
+      let end = "await page.close();";
+      console.log(end);
+      return
+    }
   }
 
   open(content: any) {
@@ -136,6 +166,10 @@ export class HomeComponent implements OnInit {
     }, (reason) => {
       console.log(reason);
     });
+  }
+
+  popup_msg(msg: string){
+    this.snackBar.open(msg,"Close", {duration: 5000, panelClass: "popup_msg"})
   }
 
 }
