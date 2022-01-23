@@ -50,34 +50,16 @@
                 <h2 class="automation_step_title">Automation Steps <img class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
                 <div class="automation_step_details">
                     <div class="automation_steps">
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
-                        #1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2#1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2#1 Go to 'www.facebook.com'
-                        <br><br>
-                        #2
+                        <ul style="list-style-type: none; padding: 0;">
+                            <li style="display: flex;" *ngFor="let instruction of bot_code_name; let indexOfElement=index;">
+                                <div style="font-family: 'Consolas'; padding-right: 5px;">
+                                    ({{indexOfElement + 1}})
+                                </div> 
+                                <div style="font-family: 'Consolas';">
+                                    {{instruction}}
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -113,7 +95,7 @@
                             Bot types on the input chosen.
                         </span>
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='SS'">
-                            Bot to screenshot current page.
+                            Bot to screenshot current page and stores in the folder where this website is located.
                         </span>
                         <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='END'">
                             Ends the automation bot.
@@ -121,7 +103,7 @@
 
                         <input formControlName="enter_input" *ngIf="selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the code element to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
 
-                        <input formControlName="enter_path"  *ngIf="selected_option === 'SS'"  placeholder="Screenshot path E.g. image.png" class="automate_details_input input_path" />
+                        <input formControlName="enter_path"  *ngIf="selected_option === 'SS'"  placeholder="Screenshot file name E.g. imgname123" class="automate_details_input input_path" />
                         <br><br>
                         <input formControlName="enter_text" *ngIf="selected_option === 'TXT'"  placeholder="Input text E.g. 'Hello! It's me!'" class="automate_details_input input_text" />
                     </div>
