@@ -1,6 +1,7 @@
 
 
 <div class="section">
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Running your bot... </p></ngx-spinner>
 
     <div class="starting_section skew_right_to_left">
         <div class="left">
@@ -47,7 +48,7 @@
     <div  class="automate_section" style="padding-right: 20px;">      
         <div class="left" style="display: block;">
             <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
-                <h2 class="automation_step_title">Automation Steps <img class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
+                <h2 class="automation_step_title">Automation Steps <img *ngIf="bot_code_name.length > 0" (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
                 <div class="automation_step_details">
                     <div class="automation_steps">
                         <ul style="list-style-type: none; padding: 0;">
@@ -68,7 +69,7 @@
         <div class="right"  style="display: block;">
 
             <!--Tasks-->
-            <!--Continue on the adding of the 'puppeteer' code for the 2nd section (*TMR*)-->
+            <!--Allow delete and adding inbetween of every step (*TMR*)-->
             <!--0. Add popup/alert box to indicate stuff(DONE)-->
             <!--1. Implement the 'puppeteer' code and store it in a localstorage-->
             <!--2. Add Login/Logout features-->
@@ -80,6 +81,7 @@
             
             
             <div class="automate_section_grid">
+               
                 <div class="numbergrid">
                     <div class="number_border" style="width: 100%;"><p class="number">2</p></div>  
                 </div>
@@ -179,9 +181,11 @@
                 <br><br>
                 Example: I want to automate a clicking of a button in a website. 
                 <br><br>
-                I will first find the code (e.g. '< button class="btn">< /button>') of the button using the 'devtools' available on my browser.
+                I will first find the code (e.g. '< button class="btn jj123" value="val123">< /button>') of the button using the 'devtools' available on my browser.
                 <br><br>
-                In this case, I will then write 'button[class=btn]' in the input field.
+                In this case, I can either write 'button[class=btn jj123]' or 'button[value=val123]' in the 1st/Top input field. Whichever works and is more unique (lower chances of duplicates in other buttons of the page). 
+                <br><br>
+                Rule of thumb, I will suggest always go for the longest characters inside the " ", especially those with spacing, in this case the former (e.g. class="btn jj123") rather than the latter. 
             </div>
 
             <div class="step3_info">

@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { BotsService } from '../shared/bots.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
   bot_code_name: string[] = [];//for the display on the left of the 2nd section
   //bot_codes: string[] = ["await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});", "await page.waitForSelector('input[name=email]'); await page.$eval('input[name=email]', el => el.value = 'jingjie105@hotmail.com');", "await page.$eval('input[id=m_login_password]', el => el.value = 'Gendensuikoden12!');"];
 
-  constructor(private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
+  constructor(private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
     backdropClass:'customBackdrop'
   }}
 
@@ -150,8 +152,8 @@ export class HomeComponent implements OnInit {
     }
     if(this.selected_option==="TXT"){
       //bot code
-      if((val['enter_input'] || val['enter_text']) === ''|| (val['enter_input'] || val['enter_text']) === null){
-        this.popup_msg("Empty input field at 'INPUT' section");
+      if((val['enter_input'] && val['enter_text']) === ''|| (val['enter_input'] && val['enter_text']) === null){
+        this.popup_msg("Empty input fields at 'INPUT' section");
         return
       }
       let waitForSelector = "await page.waitForSelector(" + '"' + val['enter_input'] + '"' + ");";
@@ -186,6 +188,19 @@ export class HomeComponent implements OnInit {
       console.log(this.bot_codes);
       return
     }
+  }
+
+  //Run the steps for the bot
+  async run_bot(){
+    console.log('bot run');
+    await this.spinner.show();
+    this.botService.runBots(this.bot_codes).then((result: any)=>{
+      console.log(result);
+      this.spinner.hide();
+    }).catch(err=>{
+      console.log(err);
+      this.spinner.hide();
+    });
   }
 
   open(content: any) {

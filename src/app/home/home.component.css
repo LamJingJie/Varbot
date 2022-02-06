@@ -461,7 +461,7 @@
 
 .modal-body{
     display: grid;
-    grid-template-rows: minmax(5vh, auto) minmax(35vh, auto) minmax(5vh, auto) minmax(5vh, auto)
+    grid-template-rows: minmax(5vh, auto) minmax(57vh, auto) minmax(5vh, auto) minmax(5vh, auto)
                         minmax(5vh, auto) minmax(5vh, auto);
     height: 100%;
     width: 100%;

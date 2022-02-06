@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   imports: [
     BrowserModule,
+    NgxSpinnerModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'varbot'),
     AngularFirestoreModule,
