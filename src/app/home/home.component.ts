@@ -4,7 +4,7 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
 import { BotsService } from '../shared/bots.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from "ngx-spinner";
-
+import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
 
 @Component({
   selector: 'app-home',
@@ -32,6 +32,10 @@ export class HomeComponent implements OnInit {
   bot_codes: string[] = [];
   bot_code_name: string[] = [];//for the display on the left of the 2nd section
   //bot_codes: string[] = ["await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});", "await page.waitForSelector('input[name=email]'); await page.$eval('input[name=email]', el => el.value = 'jingjie105@hotmail.com');", "await page.$eval('input[id=m_login_password]', el => el.value = 'Gendensuikoden12!');"];
+
+  prev_id:number = -1;
+
+  
 
   constructor(private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
     backdropClass:'customBackdrop'
@@ -107,11 +111,12 @@ export class HomeComponent implements OnInit {
     //console.log(url.hostname);
     let code = "await page.goto(" + '"' + url.href + '"' + ", {waitUntil: 'networkidle0',});";
     //console.log(code);
-    console.log(url);
+    //console.log(url);
     //console.log(code);
     this.bot_codes[0] = code;
     this.bot_code_name[0] = 'Open to ' +'"'+ url.href + '"';
-    console.log(this.bot_code_name);
+    this.set_Style_For_Instruction_Steps_Last_Item();
+    //console.log(this.bot_code_name);
     //console.log(this.bot_codes);
     /*this.botService.runBots(this.bot_codes).then((result: any)=>{
       console.log(result);
@@ -120,7 +125,7 @@ export class HomeComponent implements OnInit {
   }
 
   //Section 2
-  add_code(val: any){
+  async add_code(val: any){
     console.log(val);
     //console.log(this.selected_option);
     if(this.bot_codes.length <= 0){
@@ -146,8 +151,9 @@ export class HomeComponent implements OnInit {
       //console.log(click);
       this.bot_codes.push(waitForSelector + click);
       this.bot_code_name.push('Click on ' + '"'+ val['enter_input'] + '"');
-      console.log(this.bot_codes);
-      console.log(this.bot_code_name);
+      //console.log(this.bot_codes);
+      //console.log(this.bot_code_name);
+      await this.set_Style_For_Instruction_Steps_Last_Item();
       return;
     }
     if(this.selected_option==="TXT"){
@@ -162,8 +168,9 @@ export class HomeComponent implements OnInit {
       //console.log(eval_var);
       this.bot_codes.push(waitForSelector + eval_var);
       this.bot_code_name.push('Go to ' + val['enter_input'] + ' input field & type ' + val['enter_text']);
-      console.log(this.bot_codes);
-      console.log(this.bot_code_name);
+      //console.log(this.bot_codes);
+      //console.log(this.bot_code_name);
+      await this.set_Style_For_Instruction_Steps_Last_Item();
       return
     }
     if(this.selected_option==="SS"){
@@ -175,8 +182,9 @@ export class HomeComponent implements OnInit {
       let screenshot = "await page.screenshot({fullPage: true, path: " + '"' + val['enter_path'] + '.png"}' + ");";
       //console.log(screenshot);
       this.bot_codes.push(screenshot);
-      this.bot_code_name.push('Screenshot file name is ' + val['enter_input']);
-      console.log(this.bot_codes);
+      this.bot_code_name.push('Screenshot file name is ' + val['enter_path']);
+      //console.log(this.bot_codes);
+      await this.set_Style_For_Instruction_Steps_Last_Item();
       return
     }
     if(this.selected_option==="END"){
@@ -185,9 +193,12 @@ export class HomeComponent implements OnInit {
       //console.log(end);
       this.bot_codes.push(end);
       this.bot_code_name.push('Bot ends here');
-      console.log(this.bot_codes);
+      //console.log(this.bot_codes);
+      await this.set_Style_For_Instruction_Steps_Last_Item();
       return
     }
+
+    
   }
 
   //Run the steps for the bot
@@ -203,6 +214,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  //Modal popup for 'help'
   open(content: any) {
     this.modalService.open(content, this.modalOptions).result.then((result) => {
      console.log(result);
@@ -211,8 +223,137 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
   popup_msg(msg: string){
     this.snackBar.open(msg,"Close", {duration: 5000, panelClass: "popup_msg"})
   }
+  
+  //when user clicks on delete steps
+  openDeletePopup(index: number, steps: string){
+    //console.log("Delete " + index);
+    //#TASK1: Add popup box for confirmation
+    const deleteModalRef = this.modalService.open(DeleteModalComponent,
+      {
+        scrollable:true,
+        windowClass: 'deleteModalClass'
+      });
+
+    let data: any = {
+      delete_index: index,
+      delete_step: steps,
+      steps_array: this.bot_codes,
+      steps_array_name: this.bot_code_name
+    }
+
+    deleteModalRef.componentInstance.fromParent = data;
+    deleteModalRef.result.then(async (result) => {
+      //console.log(result);
+      //update arrays
+      this.bot_codes = result.steps_array;
+      this.bot_code_name = result.steps_array_name;
+      
+      //highlight the step above
+      if(index > 0){
+        this.highlight_steps(index - 1);
+      }    
+      this.popup_msg("Deleted successfully!");   
+
+    }, (reason) => {
+      console.log(reason);
+    });
+    
+    
+    
+   
+  }
+
+  //Highlight a step onclick
+  highlight_steps(id:number){
+    
+    let element_highlight = document.getElementById("highlightSteps_" + id);
+    let element_instruction_steps = document.getElementById("instructionSteps_" + id);
+
+    //console.log(element_highlight);
+    //console.log(this.prev_id);
+    /*if (this.prev_id === -1) {
+      //On the 1st click(when the page first load)
+      element_highlight?.classList.add("highlight_steps_background");
+      element_instruction_steps?.classList.add("padding_down");
+      this.prev_id = id;
+      //console.log(this.prev_id);
+      return
+    }*/
+
+    //If is same id, exit the function
+    if (this.prev_id === id) {
+      return;
+    }
+    //after the 1st click onwards
+    let element_prev_highlight = document.getElementById("highlightSteps_" + this.prev_id);
+    let element_prev_instruction_steps = document.getElementById("instructionSteps_" + this.prev_id);
+   
+    //console.log(element_prev_highlight);
+    //Remove prev highlight styling
+    if (element_prev_highlight?.classList.contains("highlight_steps_background")) {
+      element_prev_highlight?.classList.remove("highlight_steps_background");
+      //console.log("Removed");
+    }
+
+    if (element_prev_instruction_steps?.classList.contains("padding_down")) {
+      element_prev_instruction_steps?.classList.remove("padding_down");
+      //console.log("Removed");
+    }
+
+    //add to current highlight
+    element_highlight?.classList.add("highlight_steps_background");
+    element_instruction_steps?.classList.add("padding_down");
+    this.prev_id = id;
+    return;
+  }
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  async set_Style_For_Instruction_Steps_Last_Item(){
+    let last_item = this.bot_codes[this.bot_codes.length - 1];
+    let last_index = this.bot_codes.lastIndexOf(last_item);
+    //console.log(last_index);
+    //console.log(this.prev_id);
+    
+    //Give very small delay to allow the element to load fully before retrieving its data
+    await this.delay(10);
+    let element_highlight = document.getElementById("highlightSteps_" + last_index);
+    let element_instruction_steps = document.getElementById("instructionSteps_" + last_index);  
+
+    //console.log(element_highlight);
+    //console.log(element_instruction_steps);
+    element_highlight?.classList.add("highlight_steps_background");
+    element_instruction_steps?.classList.add("padding_down");
+    /*
+    //If previous ID is deleted, don't need to run the code below
+    if(this.prev_id > last_index){
+      this.prev_id = last_index;
+      return;
+    }*/
+
+    //Remove styling
+    let element_prev_highlight = document.getElementById("highlightSteps_" + this.prev_id);
+    let element_prev_instruction_steps = document.getElementById("instructionSteps_" + this.prev_id);
+
+    if (element_prev_highlight?.classList.contains("highlight_steps_background")) {
+      element_prev_highlight?.classList.remove("highlight_steps_background");
+      //console.log("Removed");
+    }
+
+    if (element_prev_instruction_steps?.classList.contains("padding_down")) {
+      element_prev_instruction_steps?.classList.remove("padding_down");
+      //console.log("Removed");
+    }
+    this.prev_id = last_index;
+    //console.log(last_index);
+  }
+
+  
+  
 
 }

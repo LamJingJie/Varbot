@@ -48,16 +48,25 @@
     <div  class="automate_section" style="padding-right: 20px;">      
         <div class="left" style="display: block;">
             <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
-                <h2 class="automation_step_title">Automation Steps <img *ngIf="bot_code_name.length > 0" (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
+                <h2 class="automation_step_title">Automation Steps <img  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
                 <div class="automation_step_details">
                     <div class="automation_steps">
                         <ul style="list-style-type: none; padding: 0;">
-                            <li style="display: flex;" *ngFor="let instruction of bot_code_name; let indexOfElement=index;">
-                                <div style="font-family: 'Consolas'; padding-right: 5px;">
-                                    ({{indexOfElement + 1}})
-                                </div> 
-                                <div style="font-family: 'Consolas';">
-                                    {{instruction}}
+                            <li style="display: flex; padding-bottom: 15px;"  *ngFor="let instruction of bot_code_name; let indexOfElement=index;">
+                                <div [attr.id]="'instructionSteps_'+ indexOfElement">                              
+                                    <div class="instruction_style_grid" [attr.id]="'highlightSteps_'+ indexOfElement"
+                                        (click)="highlight_steps(indexOfElement)">
+                                        <div style="grid-column: 1;grid-row: 1; font-family: 'Consolas'; padding-right: 5px;">
+                                            ({{indexOfElement + 1}})
+                                        </div>
+                                        <div style="word-break: break-all; grid-column: 2;grid-row: 1; font-family: 'Consolas';">
+                                            {{instruction}}
+                                        </div>
+                                        <div style="grid-column: 3;grid-row: 1; font-family: 'Consolas'; float: right;">
+                                            <img (click)="openDeletePopup(indexOfElement, instruction)" class="icon hovering" alt="image" src="/assets/delete.png" />
+                                        </div>
+                                        <!--<img style="position: absolute; height: 2%; width: 1%;" alt = "image" src="/assets/play_arrow.png"/>-->
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -205,6 +214,10 @@
             <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
         </div>
     </ng-template>
+
+
+
+
 
     
 </div>

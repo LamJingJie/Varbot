@@ -532,5 +532,25 @@
     overflow-y: auto;
 }
 
+.instruction_style_grid{
+    display: grid;
+    grid-template-rows: minmax(auto, auto) minmax(auto, auto) minmax(auto, auto);
+    grid-template-columns: 1fr minmax(auto, 100vh);
+}
+
+.instruction_style_grid:hover{
+    cursor: pointer;
+}
+
+.highlight_steps_background{
+    border-bottom: 3px solid #47BB8C;
+}
+
+.padding_down{
+    padding-bottom: 80px;
+}
+
+
+
 
 

@@ -20,12 +20,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DeleteModalComponent
+  ],
+  entryComponents:[
+    DeleteModalComponent
   ],
   imports: [
     BrowserModule,
