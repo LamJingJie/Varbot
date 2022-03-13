@@ -33,7 +33,11 @@ export class HomeComponent implements OnInit {
   bot_code_name: string[] = [];//for the display on the left of the 2nd section
   //bot_codes: string[] = ["await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});", "await page.waitForSelector('input[name=email]'); await page.$eval('input[name=email]', el => el.value = 'jingjie105@hotmail.com');", "await page.$eval('input[id=m_login_password]', el => el.value = 'Gendensuikoden12!');"];
 
+  //Store the previous highlighted ID
   prev_id:number = -1;
+
+  //ID of the currently selected index/id
+  current_id_selected: number = -1;
 
   
 
@@ -115,9 +119,12 @@ export class HomeComponent implements OnInit {
     //console.log(code);
     this.bot_codes[0] = code;
     this.bot_code_name[0] = 'Open to ' +'"'+ url.href + '"';
-    this.set_Style_For_Instruction_Steps_Last_Item();
+    let last_index = this.bot_codes.lastIndexOf(code);
+    console.log(last_index);
+    this.highlight_steps(last_index);
+    //this.set_Style_For_Instruction_Steps_Last_Item();
     //console.log(this.bot_code_name);
-    //console.log(this.bot_codes);
+    console.log(this.bot_codes);
     /*this.botService.runBots(this.bot_codes).then((result: any)=>{
       console.log(result);
     });*/
@@ -126,7 +133,7 @@ export class HomeComponent implements OnInit {
 
   //Section 2
   async add_code(val: any){
-    console.log(val);
+    //console.log(val);
     //console.log(this.selected_option);
     if(this.bot_codes.length <= 0){
       this.popup_msg("Please provide the WEBSITE URL to continue.");
@@ -134,7 +141,7 @@ export class HomeComponent implements OnInit {
     }
 
     if(this.bot_code_name.includes('Bot ends here')){
-      this.popup_msg("No adding of instructions after you have ended your bot.");
+      this.popup_msg("No adding of instructions after you have ended it.");
       return
     }
 
@@ -149,11 +156,13 @@ export class HomeComponent implements OnInit {
       
       //console.log(waitForSelector);
       //console.log(click);
-      this.bot_codes.push(waitForSelector + click);
-      this.bot_code_name.push('Click on ' + '"'+ val['enter_input'] + '"');
-      //console.log(this.bot_codes);
+      this.bot_codes.splice(this.current_id_selected + 1, 0, waitForSelector + click);
+      //this.bot_codes.push(waitForSelector + click);
+      this.bot_code_name.splice(this.current_id_selected + 1, 0, 'Click on ' + '"'+ val['enter_input'] + '"')
+      console.log(this.bot_codes);
+      console.log(this.current_id_selected);
       //console.log(this.bot_code_name);
-      await this.set_Style_For_Instruction_Steps_Last_Item();
+      //await this.set_Style_For_Instruction_Steps_Last_Item();
       return;
     }
     if(this.selected_option==="TXT"){
@@ -166,11 +175,13 @@ export class HomeComponent implements OnInit {
       let eval_var = "await page.$eval(" + '"' + val['enter_input'] + '", el => el.value = ' + '"' + val['enter_text'] + '"' + ");"
       //console.log(waitForSelector);
       //console.log(eval_var);
-      this.bot_codes.push(waitForSelector + eval_var);
-      this.bot_code_name.push('Go to ' + val['enter_input'] + ' input field & type ' + val['enter_text']);
+
+      //Added +1 so that it will push the new item below the top item
+      this.bot_codes.splice(this.current_id_selected + 1, 0, waitForSelector + eval_var);
+      this.bot_code_name.splice(this.current_id_selected + 1, 0,'Go to ' + val['enter_input'] + ' input field & type ' +'"' + val['enter_text'] + '"');
       //console.log(this.bot_codes);
       //console.log(this.bot_code_name);
-      await this.set_Style_For_Instruction_Steps_Last_Item();
+      //await this.set_Style_For_Instruction_Steps_Last_Item();
       return
     }
     if(this.selected_option==="SS"){
@@ -181,10 +192,10 @@ export class HomeComponent implements OnInit {
       }
       let screenshot = "await page.screenshot({fullPage: true, path: " + '"' + val['enter_path'] + '.png"}' + ");";
       //console.log(screenshot);
-      this.bot_codes.push(screenshot);
-      this.bot_code_name.push('Screenshot file name is ' + val['enter_path']);
+      this.bot_codes.splice(this.current_id_selected + 1, 0,screenshot);
+      this.bot_code_name.splice(this.current_id_selected + 1, 0,'Screenshot file name is ' +'"' +  val['enter_path'] + '"');
       //console.log(this.bot_codes);
-      await this.set_Style_For_Instruction_Steps_Last_Item();
+      //await this.set_Style_For_Instruction_Steps_Last_Item();
       return
     }
     if(this.selected_option==="END"){
@@ -194,7 +205,7 @@ export class HomeComponent implements OnInit {
       this.bot_codes.push(end);
       this.bot_code_name.push('Bot ends here');
       //console.log(this.bot_codes);
-      await this.set_Style_For_Instruction_Steps_Last_Item();
+      //await this.set_Style_For_Instruction_Steps_Last_Item();
       return
     }
 
@@ -210,6 +221,7 @@ export class HomeComponent implements OnInit {
       this.spinner.hide();
     }).catch(err=>{
       console.log(err);
+      this.popup_msg(err);
       this.spinner.hide();
     });
   }
@@ -220,7 +232,9 @@ export class HomeComponent implements OnInit {
      console.log(result);
     }, (reason) => {
       console.log(reason);
-    });
+    }).catch((err=>{
+      this.popup_msg(err);
+    }));
   }
 
 
@@ -260,19 +274,23 @@ export class HomeComponent implements OnInit {
 
     }, (reason) => {
       console.log(reason);
-    });
-    
-    
-    
+    }).catch((err=>{
+      this.popup_msg(err);
+    }));
    
   }
 
   //Highlight a step onclick
-  highlight_steps(id:number){
-    
+  async highlight_steps(id:number){
+
+    this.current_id_selected = id;
+
+    //Mini-delay before executing to allow the new item to be loaded into the frontend.
+    //So that we are able to retrieve the new ID.
+    await this.delay(10);
     let element_highlight = document.getElementById("highlightSteps_" + id);
     let element_instruction_steps = document.getElementById("instructionSteps_" + id);
-
+    
     //console.log(element_highlight);
     //console.log(this.prev_id);
     /*if (this.prev_id === -1) {
@@ -314,6 +332,7 @@ export class HomeComponent implements OnInit {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
+  /*
   async set_Style_For_Instruction_Steps_Last_Item(){
     let last_item = this.bot_codes[this.bot_codes.length - 1];
     let last_index = this.bot_codes.lastIndexOf(last_item);
@@ -329,12 +348,12 @@ export class HomeComponent implements OnInit {
     //console.log(element_instruction_steps);
     element_highlight?.classList.add("highlight_steps_background");
     element_instruction_steps?.classList.add("padding_down");
-    /*
+    
     //If previous ID is deleted, don't need to run the code below
     if(this.prev_id > last_index){
       this.prev_id = last_index;
       return;
-    }*/
+    }
 
     //Remove styling
     let element_prev_highlight = document.getElementById("highlightSteps_" + this.prev_id);
@@ -352,6 +371,7 @@ export class HomeComponent implements OnInit {
     this.prev_id = last_index;
     //console.log(last_index);
   }
+  */
 
   
   
