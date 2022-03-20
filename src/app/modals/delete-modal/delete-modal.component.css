@@ -1,0 +1,45 @@
+.modal-title{
+    font-family: 'Consolas';
+    font-size: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.modal-body div {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-footer{
+    display: flex;
+}
+
+.btn{
+    background: none;
+}
+
+/*del btn*/
+.btn-primary{
+    border: 2px solid red;
+    color: red;
+    font-weight:500;
+    flex: 1;
+}
+
+.btn-primary:hover{
+    background: red;
+    color: white;
+}
+
+/*Cancel btn*/
+.btn-secondary{
+    border: 2px solid gray;
+    color: grey;
+    flex: 1;
+}
+
+.btn-secondary:hover{
+    background: gray;
+    color: white;
+}

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -215,10 +216,10 @@ export class HomeComponent implements OnInit {
   //Run the steps for the bot
   async run_bot(){
     console.log('bot run');
-    await this.spinner.show();
+    await this.spinner.show('bot');
     this.botService.runBots(this.bot_codes).then((result: any)=>{
       console.log(result);
-      this.spinner.hide();
+      this.spinner.hide('bot');
     }).catch(err=>{
       console.log(err);
       this.popup_msg(err);
@@ -261,8 +262,12 @@ export class HomeComponent implements OnInit {
 
     deleteModalRef.componentInstance.fromParent = data;
     deleteModalRef.result.then(async (result) => {
-      //console.log(result);
+      console.log(result);
       //update arrays
+      if(result === null || result === '' || result === undefined){
+        return;
+      }
+      this.spinner.show("del");
       this.bot_codes = result.steps_array;
       this.bot_code_name = result.steps_array_name;
       
@@ -270,7 +275,14 @@ export class HomeComponent implements OnInit {
       if(index > 0){
         this.highlight_steps(index - 1);
       }    
+
+      //No step above, highlight the step below
+      if(index <= 0){
+        this.highlight_steps(index+1);
+      }
+
       this.popup_msg("Deleted successfully!");   
+      this.spinner.hide("del");
 
     }, (reason) => {
       console.log(reason);
@@ -302,10 +314,6 @@ export class HomeComponent implements OnInit {
       return
     }*/
 
-    //If is same id, exit the function
-    if (this.prev_id === id) {
-      return;
-    }
     //after the 1st click onwards
     let element_prev_highlight = document.getElementById("highlightSteps_" + this.prev_id);
     let element_prev_instruction_steps = document.getElementById("instructionSteps_" + this.prev_id);

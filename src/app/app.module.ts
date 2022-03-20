@@ -21,6 +21,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { DeleteModalComponent } from './modals/delete-modal/delete-modal.compone
     NgbModule,
     FormsModule,
     MatSnackBarModule,
+    MatTooltipModule,
     ReactiveFormsModule ,
     RouterModule.forRoot([
       {path: '', component: HomeComponent}

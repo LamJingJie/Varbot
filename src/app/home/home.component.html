@@ -1,8 +1,9 @@
-
-
 <div class="section">
-    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Running your bot... </p></ngx-spinner>
+    <!--Loading designs-->
+    <ngx-spinner name="bot" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Running your bot... </p></ngx-spinner>
+    <ngx-spinner name="del" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "pacman" [fullScreen] = "true"><p style="color: white" > Deleting Step(s)... </p></ngx-spinner>
 
+    <!--Introduction Page-->
     <div class="starting_section skew_right_to_left">
         <div class="left">
             <div class="title">
@@ -24,7 +25,7 @@
         </div>   
     </div>
 
-    
+    <!--Section 1: Adding of website URL form-->
     <div class="url_section" style="padding-left: 20px;"> 
         <div class="left" style="display: block;">
             <div class="number_border"><p class="number">1</p></div>
@@ -44,12 +45,13 @@
         </div>       
     </div>
 
-
-    <div  class="automate_section" style="padding-right: 20px;">      
+    <!--Section 2: Commands area/section-->
+    <div class="automate_section" style="padding-right: 20px;">      
         <div class="left" style="display: block;">
             <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
-                <h2 class="automation_step_title">Automation Steps <img  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
+                <h2 class="automation_step_title">Automation Steps <img *ngIf="bot_codes.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
                 <div class="automation_step_details">
+                    <!--Automation steps list-->
                     <div class="automation_steps">
                         <ul style="list-style-type: none; padding: 0;">
                             <li style="display: flex; padding-bottom: 15px;"  *ngFor="let instruction of bot_code_name; let indexOfElement=index;">
@@ -65,7 +67,6 @@
                                         <div style="grid-column: 3;grid-row: 1; font-family: 'Consolas'; float: right;">
                                             <img (click)="openDeletePopup(indexOfElement, instruction)" class="icon hovering" alt="image" src="/assets/delete.png" />
                                         </div>
-                                        <!--<img style="position: absolute; height: 2%; width: 1%;" alt = "image" src="/assets/play_arrow.png"/>-->
                                     </div>
                                 </div>
                             </li>
@@ -78,15 +79,10 @@
         <div class="right"  style="display: block;">
 
             <!--Tasks-->
-            <!--Allow delete and adding inbetween of every step (*TMR*)-->
-            <!--0. Add popup/alert box to indicate stuff(DONE)-->
-            <!--1. Implement the 'puppeteer' code and store it in a localstorage-->
             <!--2. Add Login/Logout features-->
             <!--3. Add Favourite feature-->
             <!--4. Ensure that when a saved bot is loaded, it will show a red dot whenever it has been
                     edited to remind users to save. And also a popup box warning them if they didn't-->
-            <!--2. Add the 'lightbulb' section (not important)-->
-            <!--3. Add some final touches to the design (not important)-->
             
             
             <div class="automate_section_grid">
@@ -97,21 +93,9 @@
 
                 <h2 class="automate_details_title">Addings Steps To Automation</h2>
 
+                <!--Section 2 Input fields form-->
                 <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code(automation_section_form.value)">
                     <div style="padding-bottom: 30px; text-align: center;">
-                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='CLICK'">
-                            Bot to click on anything clickable.
-                        </span>
-                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='TXT'">
-                            Bot types on the input chosen.
-                        </span>
-                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='SS'">
-                            Bot to screenshot current page and stores in the folder where this website is located.
-                        </span>
-                        <span style="font-size: 15px; font-weight: bold;" *ngIf="selected_option ==='END'">
-                            Ends the automation bot.
-                        </span>
-
                         <input formControlName="enter_input" *ngIf="selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the code element to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
 
                         <input formControlName="enter_path"  *ngIf="selected_option === 'SS'"  placeholder="Screenshot file name E.g. imgname123" class="automate_details_input input_path" />
@@ -147,14 +131,39 @@
                 </form>
 
                 <div class="icons">
-                    <img class="icon" src="/assets/lightbulb_icon.png" alt="tips"/>
-                    <img (click)="open(mymodal)" class="icon" src="/assets/help_icon.png" alt="help"/>
+                    <!--Hints-->
+                    <button style="border:none; padding: 0;" class="remove_input_style" mat-raised-button matTooltip="Bot to click on anything clickable."
+                    *ngIf="selected_option ==='CLICK'"
+                    aria-label="Bot to click on anything clickable.">
+                        <img class="icon" src="/assets/lightbulb_icon.png" alt="tips" />
+                    </button>
+                    <button style="border:none; padding: 0;" class="remove_input_style" mat-raised-button matTooltip="Bot types on the input chosen."
+                    *ngIf="selected_option ==='TXT'"
+                    aria-label="Bot types on the input chosen.">
+                        <img class="icon" src="/assets/lightbulb_icon.png" alt="tips" />
+                    </button>
+                    <button style="border:none; padding: 0;" class="remove_input_style" mat-raised-button matTooltip="Bot to screenshot current page and saves it."
+                    *ngIf="selected_option ==='SS'"
+                    aria-label="Bot to screenshot current page and saves it.">
+                        <img class="icon" src="/assets/lightbulb_icon.png" alt="tips" />
+                    </button>
+                    <button style="border:none; padding: 0;" class="remove_input_style" mat-raised-button matTooltip="Ends the automation bot."
+                    *ngIf="selected_option ==='END'"
+                    aria-label="Ends the automation bot.">
+                        <img class="icon" src="/assets/lightbulb_icon.png" alt="tips" />
+                    </button>
+                    
+                    <!--Help-->
+                    <button style="border: none; padding: 0;" class="remove_input_style">
+                        <img (click)="open(mymodal)" class="icon" src="/assets/help_icon.png" alt="help"/>
+                    </button>                  
                 </div>                
             </div>           
             
             
         </div>
     </div>
+    <!--Footer/Last Section-->
     <div class="last_section skew_left_to_right">     
         <div class="left" style="flex: 2; margin: auto; display: block; padding: 10px;">
             
@@ -164,6 +173,7 @@
         </div>      
     </div>
     
+    <!--Help Modal-->
     <ng-template #mymodal let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title"><button type="button" class="close" aria-label="Close"
@@ -214,10 +224,5 @@
             <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
         </div>
     </ng-template>
-
-
-
-
-
     
 </div>

@@ -1,14 +1,17 @@
 <div class="modal-header">
-    <h5 class="modal-title">Are you sure you want to delete</h5>
+    <h5 class="modal-title">Permanently delete the command</h5>
     <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <div class="modal-body">
-    <div>
-        {{fromParent.delete_step}} ?
+    <div style="padding: 20px; padding-top: 0px; display: flex; justify-content: center; color: red;" *ngIf="this.fromParent.delete_index === 0">
+        Note: Deleting this "Go To Website" command will delete everything after it. Are you sure?
     </div>
-
+    <div style=" padding-bottom: 10px;">
+        Command: <b style="padding-left: 5px; color: #47BB8C;"> {{fromParent.delete_step}}</b>
+    </div>
+    
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>

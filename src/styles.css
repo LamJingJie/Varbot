@@ -35,13 +35,21 @@ html, body{
     background: linear-gradient(to right, #59467D 30%, #47BB8C);
     
 }
-        /*Button style*/
+
+/*Button style*/
 .popup_msg div div simple-snack-bar div{
     color: lightgray;
 }
-        /*Popup info/msg style*/
+
+/*Popup info/msg style*/
 .popup_msg div div simple-snack-bar{
     color: white;
+}
+
+/*delete modal*/
+.deleteModalClass div .modal-content{
+    height: fit-content;
+    max-height: 70%;
 }
 
 

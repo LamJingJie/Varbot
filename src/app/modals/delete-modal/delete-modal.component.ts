@@ -15,15 +15,26 @@ export class DeleteModalComponent implements OnInit {
     //console.log(this.fromParent);
   }
   /*Tasks
-    #1: Design the delete modal
-    #2: Add loading screen when 'del' btn is clicked
-    #2: Design the highlight
-    #3: Allow user to add more steps inbetween others (done)
+    #1: Design the delete modal (done)
+    #2: Add loading screen when 'del' btn is clicked (done)
+    #3: Add login function
+    #4: Add 'hint' function (done)
   */
 
   delete(){
-    this.fromParent.steps_array.splice(this.fromParent.delete_index,1);
-    this.fromParent.steps_array_name.splice(this.fromParent.delete_index,1);
+
+    //If the website url is to be deleted
+    if(this.fromParent.delete_index === 0){
+      //Delete everything after index '0'
+      this.fromParent.steps_array.splice(this.fromParent.delete_index);
+      this.fromParent.steps_array_name.splice(this.fromParent.delete_index);
+      console.log(this.fromParent.steps_array);
+    }else{
+      //Delete that only
+      this.fromParent.steps_array.splice(this.fromParent.delete_index,1);
+      this.fromParent.steps_array_name.splice(this.fromParent.delete_index,1);
+    }
+    
     this.activeModal.close(this.fromParent);
     //console.log('delete')
   }
