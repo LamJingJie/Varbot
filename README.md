@@ -2,39 +2,38 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
-<h1>IMPORTANT</h1>
-<table>
-<tr>
-  <td>
-    As of <b>29 September 2021</b> it is not possible to make a bot run on client side as an <b>error</b> will occur if you attempt to use
-    either the 'puppeteer', 'selenium' or 'protractor' plugin.
-  </td>
-  <td>
-    Will come back to this project once there is a solution for this issue down the line.
-  </td>
-</tr>
-</table>
-
 <br><br>
 
 <h1>TASKS</h1>
-<table>
-<tr>
-  <td>
-    1. Design the webpage & ensure it is responsive
-  </td>
-  <td>
-    Change to a sneaker bot website otherwise ecommerce bot (lazada, etc)
-  </td>
-</tr>
-</table>
+
 <br><br>
 
 <h2>About</h2>
 - This website allows users to create 'bots' using puppeteer as the plugin to 
   automate websites.
 <br>
-- Uses Angular 12, node v15, firebase, puppeteer and typescript
+<table>
+<tr>
+  <td>
+    1. <b> Angular 12 </b> used as the frontend framework
+  </td>
+  <td>
+    2. <b> Express </b> framework used, which is a <b> Node.js </b> framework. Used in-unison to aid in the backend
+  </td>
+  <td>
+    3. <b> Node.js V15 </b> used as the backend JS run-time environment 
+  </td>
+  <td>
+    4. <b> Firebase </b> used as the database
+  </td>
+  <td>
+    5. <b> Puppetter </b> used for bopt building and instructing
+  </td>
+  <td>
+    6. <b> Typescript </b> as the main programming language followed by JS (for the backend)
+  </td>
+</tr>
+</table> 
 
 
 ## Development server
