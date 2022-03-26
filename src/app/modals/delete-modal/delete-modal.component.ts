@@ -1,25 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { BotServiceService } from 'src/service/bot-service.service';
+import  Bot  from 'src/service/bot-service.service';
 @Component({
   selector: 'app-delete-modal',
   templateUrl: './delete-modal.component.html',
   styleUrls: ['./delete-modal.component.css']
 })
 export class DeleteModalComponent implements OnInit {
+  bot: Bot = new Bot();
+
   @Input() fromParent: any;
-  constructor( public activeModal: NgbActiveModal) { }
-  array: Array<string> = [];
+  constructor(private botService: BotServiceService, public activeModal: NgbActiveModal) { }
+
 
   ngOnInit(){
     //console.log(this.fromParent);
   }
-  /*Tasks
-    #1: Design the delete modal (done)
-    #2: Add loading screen when 'del' btn is clicked (done)
-    #3: Add login function
-    #4: Add 'hint' function (done)
-  */
+ 
+
 
   delete(){
 

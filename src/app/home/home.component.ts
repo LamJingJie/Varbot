@@ -5,7 +5,11 @@ import { BotsService } from '../shared/bots.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
-
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { BotServiceService } from 'src/service/bot-service.service';
+import  Bot  from 'src/service/bot-service.service';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +21,7 @@ export class HomeComponent implements OnInit {
     enter_website: new FormControl(''),
   });
 
+  bot: Bot = new Bot();
   automation_section_form = new FormGroup({
     
     enter_input: new FormControl(''),
@@ -42,7 +47,7 @@ export class HomeComponent implements OnInit {
 
   
 
-  constructor(private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
+  constructor(private botServiceService: BotServiceService,private db: AngularFireDatabase, private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
     backdropClass:'customBackdrop'
   }}
 
@@ -340,48 +345,37 @@ export class HomeComponent implements OnInit {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
-  /*
-  async set_Style_For_Instruction_Steps_Last_Item(){
-    let last_item = this.bot_codes[this.bot_codes.length - 1];
-    let last_index = this.bot_codes.lastIndexOf(last_item);
-    //console.log(last_index);
-    //console.log(this.prev_id);
+  Save(){
+    let getAll_Subscription: Subscription;
+    let dateTime = Date.now();
+
+    this.bot.lists_code = this.bot_codes;
+    this.bot.lists_desc = this.bot_code_name;
+    this.bot.last_saved = dateTime;
+    //console.log(this.bot);
+    this.botServiceService.add(this.bot);
+
+    /*this.botServiceService.get("-Mz4iriVgjbuAGXpqMe6").then(snapshot=>{
+      console.log(snapshot.val());
+      console.log(snapshot.key);
+    });*/
     
-    //Give very small delay to allow the element to load fully before retrieving its data
-    await this.delay(10);
-    let element_highlight = document.getElementById("highlightSteps_" + last_index);
-    let element_instruction_steps = document.getElementById("instructionSteps_" + last_index);  
+    /*getAll_Subscription = this.botServiceService.getAll().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(data => {
+      console.log(data);
+    });*/
 
-    //console.log(element_highlight);
-    //console.log(element_instruction_steps);
-    element_highlight?.classList.add("highlight_steps_background");
-    element_instruction_steps?.classList.add("padding_down");
+    //this.botServiceService.update("-Mz4iriVgjbuAGXpqMe6",this.bot);
+
+    //console.log(this.botServiceService.get("-Mz4iriVgjbuAGXpqMe6"));
     
-    //If previous ID is deleted, don't need to run the code below
-    if(this.prev_id > last_index){
-      this.prev_id = last_index;
-      return;
-    }
-
-    //Remove styling
-    let element_prev_highlight = document.getElementById("highlightSteps_" + this.prev_id);
-    let element_prev_instruction_steps = document.getElementById("instructionSteps_" + this.prev_id);
-
-    if (element_prev_highlight?.classList.contains("highlight_steps_background")) {
-      element_prev_highlight?.classList.remove("highlight_steps_background");
-      //console.log("Removed");
-    }
-
-    if (element_prev_instruction_steps?.classList.contains("padding_down")) {
-      element_prev_instruction_steps?.classList.remove("padding_down");
-      //console.log("Removed");
-    }
-    this.prev_id = last_index;
-    //console.log(last_index);
   }
-  */
 
-  
   
 
 }

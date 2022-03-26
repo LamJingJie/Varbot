@@ -4,10 +4,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <br><br>
 
-<h1>TASKS</h1>
-
-<br><br>
-
 <h2>About</h2>
 - This website allows users to create 'bots' using puppeteer as the plugin to 
   automate websites.
@@ -24,10 +20,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     3. <b> Node.js V15 </b> used as the backend JS run-time environment 
   </td>
   <td>
-    4. <b> Firebase </b> used as the database
+    4. <b> Realtime Firebase </b> used as the database because it has btr latency, allowing data to appear more 'realtime' as compared to Cloud Firestore
   </td>
   <td>
-    5. <b> Puppetter </b> used for bopt building and instructing
+    5. <b> Puppetter </b> used for bot building and instructing
   </td>
   <td>
     6. <b> Typescript </b> as the main programming language followed by JS (for the backend)
