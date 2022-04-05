@@ -1,0 +1,57 @@
+<!--Sign Up Form-->
+<form [formGroup]="signup_form" class="automate_details"
+    (ngSubmit)="signup(signup_form.value)">
+    <div class="title">
+        SIGN UP
+    </div>
+
+    <div class = "signup_container">
+        <!--Email-->
+        <div class="email">
+            <input formControlName="email"
+            placeholder="email"
+            type="email"
+            class="email_input" />
+        </div>
+       
+        <!--Name-->
+        <div class="name">
+            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                <!---Tasks--->
+                <!--#1: Finish the err msg for all this-->
+                <div *ngIf="name?.errors?.required">
+                    Name is required.
+                </div>
+            </div>
+        
+            <input formControlName="name" type="text" placeholder="Name" class="name_input" />
+        </div>
+        
+        <!--Password(s)-->
+        <div class="password(s)">
+            <div *ngIf="confirm_password?.invalid && (confirm_password?.dirty || confirm_password?.touched)">
+                <div *ngIf="confirm_password?.errors?.required">Confirm Password is required</div>
+                <div *ngIf="confirm_password?.errors?.mustMatch" style="padding: 10px;">Password and confirm not match</div>
+            </div>
+
+            <input formControlName="password" type="password" class="password_input"
+            placeholder="Password" class="automate_details_input input_text" />
+
+            <input formControlName="confirm_password" type="password" class="confirm_password_input"
+            placeholder="Confirm Password" class="automate_details_input input_text" />
+        </div>
+
+
+
+        <!--Sign up by google-->
+        <div class="google">
+            <button>Google</button>
+        </div>
+        
+    </div>
+    <div style="padding-top: 10px;">
+        <button type="submit" class="add_btn" [disabled]="!signup_form.valid">
+            <div style="margin: auto;">Sign Up</div>
+        </button>
+    </div>
+</form>

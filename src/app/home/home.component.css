@@ -6,7 +6,6 @@
     width: 100%;
 }
 
-
 .remove_input_style{
     border: none;
     background: transparent;
@@ -22,7 +21,6 @@
 .skew_left_to_right{
     clip-path: polygon(100% 25%, 0px 0px, 0px 100%, 100% 100%);
 }
-
 
 .left{
     flex: 1;
@@ -75,6 +73,35 @@
     color: white;
     overflow: hidden;
     z-index: 2;  
+}
+
+.Ellpsis{
+    position: relative;
+    top: 2%;
+    right: 5%;
+    bottom: 0;
+}
+
+.account:hover{
+    cursor: default;
+    background: none;
+    outline: none;
+}
+
+
+.verticalEllpsis:hover{
+    color: #45375f;
+    cursor: pointer;
+    
+}
+
+/*Remove Autofocus from menu and menu button onclick*/
+#menu-item:focus{
+    outline: none !important;
+}
+
+.verticalEllpsis:focus{
+    outline: none !important;
 }
 
 .title{

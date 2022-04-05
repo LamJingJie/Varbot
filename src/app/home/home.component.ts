@@ -6,10 +6,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { LoginComponent } from "../modals/login/login.component";
+import { SignupComponent } from "../modals/signup/signup.component";
+
+//Services 
 import { BotServiceService } from 'src/service/bot-service.service';
+import { AuthenticationService } from 'src/service/authentication.service';
 import  Bot  from 'src/service/bot-service.service';
+
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-home',
@@ -47,7 +54,7 @@ export class HomeComponent implements OnInit {
 
   
 
-  constructor(private botServiceService: BotServiceService,private db: AngularFireDatabase, private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
+  constructor(private authService: AuthenticationService, private botServiceService: BotServiceService,private db: AngularFireDatabase, private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
     backdropClass:'customBackdrop'
   }}
 
@@ -268,10 +275,12 @@ export class HomeComponent implements OnInit {
     deleteModalRef.componentInstance.fromParent = data;
     deleteModalRef.result.then(async (result) => {
       console.log(result);
-      //update arrays
+      
       if(result === null || result === '' || result === undefined){
         return;
       }
+
+      //update array
       this.spinner.show("del");
       this.bot_codes = result.steps_array;
       this.bot_code_name = result.steps_array_name;
@@ -376,6 +385,85 @@ export class HomeComponent implements OnInit {
     
   }
 
+
+
+  //Account related
+
+  account(){
+    //#1: Show both their bots and name changing option in a modal
+    console.log('account');
+  }
+
+  login(){
+    console.log('login');
+    //this.popup_msg('Logged In Successfully');
+    //LoginComponent
+    const LoginModalRef = this.modalService.open(LoginComponent,
+      {
+        scrollable: true,
+        windowClass: 'LoginModalClass'
+      });
+
+      LoginModalRef.result.then(async (result) => {
+      console.log(result);
+
+
+    }, (reason) => {
+      console.log(reason);
+    }).catch((err => {
+      this.popup_msg(err);
+    }));
+    
+  }
+
+  signup(){
+    //#1: Signup by google account
+    console.log('signup');
+    //this.popup_msg('Signed Up Successfully');
+    const SignupModalRef = this.modalService.open(SignupComponent,
+      {
+        scrollable: true,
+        windowClass: 'SignupModalClass'
+      });
+
+      SignupModalRef.result.then(async (result) => {
+      console.log(result);
+
+
+    }, (reason) => {
+      console.log(reason);
+    }).catch((err => {
+      this.popup_msg(err);
+    }));
+  }
+
+  logout(){
+    console.log('logout');
+    this.popup_msg('Logged Out Successfully');
+  }
+  /*openAuthModal(type: string){
+    const AuthModalRef = this.modalService.open(AuthenticateComponent,
+      {
+        scrollable:true,
+        windowClass: 'AuthModalClass'
+      });
+
+      let data: any = {
+        type: type
+      }
+  
+      AuthModalRef.componentInstance.fromParent = data;
+      AuthModalRef.result.then(async (result) => {
+        console.log(result);
+
+  
+      }, (reason) => {
+        console.log(reason);
+      }).catch((err=>{
+        this.popup_msg(err);
+      }));
+  }*/
+  }
   
 
-}
+

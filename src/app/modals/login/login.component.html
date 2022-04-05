@@ -1,0 +1,28 @@
+<!--Login Form-->
+<form [formGroup]="login_form" class="automate_details"
+    (ngSubmit)="login(login_form.value)">
+    <div class="title">
+        LOGIN
+    </div>
+
+    <div>
+        <!--Email-->
+        <div class="email">
+            <input type="email" formControlName="email" placeholder="Email" class="email_input" />
+        </div>
+        
+        <!--Password-->
+        <div class="password">
+            <input type="password" formControlName="password" placeholder="Password" class="password_input" />
+        </div>
+
+        <div class="forget_password_container">
+            <button>Forgot password?</button>
+        </div>
+    </div>
+    <div style="padding-top: 10px;">
+        <button type="submit" class="add_btn" [disabled]="!login_form.valid">
+            <div style="margin: auto;">Login</div>
+        </button>
+    </div>
+</form>

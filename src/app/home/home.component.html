@@ -21,7 +21,33 @@
                 <button class="aboutus_btn">
                     Get Started...
                 </button>
-            </div>       
+            </div>     
+            <h1 class="Ellpsis">
+                <button aria-label="Login Status" class="verticalEllpsis" style="background: none; border: none;" mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <div style="display:flex; border-bottom: 1px solid #59467D;" class="account" mat-menu-item>
+                        <div style="margin: auto;">
+                            Currently 
+                            <b style="color: #47BB8C;">Logged In</b>
+                        </div>                    
+                    </div>
+                    <button (click)="account()" id="menu-item" mat-menu-item>
+                        <mat-icon>account_box</mat-icon>
+                        <span>Lam Jing Jie Mr JJ test extra data</span>
+                    </button>
+                    <button (click)="login()" id="menu-item" mat-menu-item>
+                        <span>Login</span>
+                    </button>
+                    <button (click)="signup()" id="menu-item" mat-menu-item>
+                        <span>Sign Up</span>
+                    </button>
+                    <button (click)="logout()" id="menu-item" mat-menu-item>
+                        <span>Logout</span>
+                    </button>
+                </mat-menu>          
+            </h1>  
         </div>   
     </div>
 

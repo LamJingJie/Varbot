@@ -21,7 +21,7 @@ export class BotServiceService {
   }
 
    /*Tasks
-    #1: Add login function
+    #1: Add login function (*tmr*)
     #2: Add the CRUD function to DB (done)
     #3: Add the save btn logo, replacing the text box
     #4: Add "Saved" function that shows all saved bots

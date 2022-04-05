@@ -23,17 +23,25 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from'@angular/material/icon';
+import { SignupComponent } from './modals/signup/signup.component';
+import { LoginComponent } from './modals/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    SignupComponent,
+    LoginComponent,
+
   ],
   entryComponents:[
-    DeleteModalComponent
+    DeleteModalComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     AngularFireStorageModule,
     HttpClientModule,
     NgbModule,
+    MatIconModule,
     FormsModule,
+    MatMenuModule,
     MatSnackBarModule,
     MatTooltipModule,
     ReactiveFormsModule ,
