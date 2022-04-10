@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService } from '../../../service/authentication.service';
+import { UserService, User } from '../../../service/user.service';
+import { ForgotPasswordComponent } from "../../modals/forgot-password/forgot-password.component";
 
 @Component({
   selector: 'app-login',
@@ -9,7 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LoginComponent implements OnInit {
   login_form: FormGroup;
-  constructor(private formBuilder: FormBuilder, public activeModal: NgbActiveModal) {
+  constructor(private modalService: NgbModal, private authService: AuthenticationService, private formBuilder: FormBuilder, public activeModal: NgbActiveModal) {
 
     this.login_form = this.formBuilder.group({
     
@@ -36,8 +39,34 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(val: string){
+  login(val: any){
     console.log(val);
+    
+    //console.log(userData);
+    this.authService.login(val.email, val.password).then((res=>{
+      this.closeModal();
+    }));
+  }
+
+  forget_password(){
+    //#Go to the next modal
+    const ForgotPasswordModalRef = this.modalService.open(ForgotPasswordComponent,
+      {
+        scrollable: true,
+        windowClass: 'ForgotPasswordModalClass',
+        backdrop: false,
+        modalDialogClass: 'modal-side modal-bottom-right'
+      });
+
+      ForgotPasswordModalRef.result.then(async (result) => {
+      console.log(result);
+
+
+    }, (reason) => {
+      console.log(reason);
+    }).catch((err => {
+      console.log(err);
+    }));
   }
 
   get email() { return this.login_form.get('email'); }

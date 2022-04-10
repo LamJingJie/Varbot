@@ -2,7 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
-<br><br>
+<br><br><br>
+
+<h2>Tasks</h2>
+<table>
+<tr>
+  1. Do the transition animations for the 'forgot-password' modal
+</tr>
+<tr>
+  2. Design the modals relating to auth
+</tr>
+<tr>
+  3. Change 'forgot-password' modal closing icon to a 'back-arrow'
+</tr>
+</table>
+
+<br><br><br>
 
 <h2>About</h2>
 - This website allows users to create 'bots' using puppeteer as the plugin to 

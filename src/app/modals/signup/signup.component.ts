@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomValidation } from '../../../class/custom-validation';
+import { AuthenticationService } from '../../../service/authentication.service';
+import { UserService, User } from '../../../service/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +14,7 @@ import { CustomValidation } from '../../../class/custom-validation';
 export class SignupComponent implements OnInit {
   
   signup_form: FormGroup;
-  constructor(private formBuilder: FormBuilder , public activeModal: NgbActiveModal) {
+  constructor( public afAuth: AngularFireAuth, private authService: AuthenticationService, private userService: UserService, private formBuilder: FormBuilder , public activeModal: NgbActiveModal) {
  
     this.signup_form = this.formBuilder.group(
       {
@@ -53,13 +56,26 @@ export class SignupComponent implements OnInit {
    
   }
 
-  signup(val: string){
-    console.log(val);
+  signup(val: any){
+    //console.log(val.name);
+    let userData: User ={
+      name: val['name'],
+      email: val.email
+    }
+    //console.log(userData);
+    this.authService.SignUp(val.email, userData, val.password).then(()=>{
+      this.closeModal();
+    });
   }
 
   closeModal() {
     this.activeModal.close();
     //console.log('close');
+  }
+
+  test(){
+    console.log(this.authService.isLoggedIn);
+    console.log(this.authService.loginUserDetail);
   }
 
 

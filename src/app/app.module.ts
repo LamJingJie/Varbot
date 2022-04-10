@@ -27,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from'@angular/material/icon';
 import { SignupComponent } from './modals/signup/signup.component';
 import { LoginComponent } from './modals/login/login.component';
+import { ForgotPasswordComponent } from './modals/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { LoginComponent } from './modals/login/login.component';
     DeleteModalComponent,
     SignupComponent,
     LoginComponent,
+    ForgotPasswordComponent,
 
   ],
   entryComponents:[

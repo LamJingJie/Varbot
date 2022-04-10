@@ -27,7 +27,6 @@ export class CustomValidation {
           matchingControl.setErrors(null);
           return null;
         }
-        return null;
       };
     }
 }

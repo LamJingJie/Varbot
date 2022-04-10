@@ -440,6 +440,7 @@ export class HomeComponent implements OnInit {
   logout(){
     console.log('logout');
     this.popup_msg('Logged Out Successfully');
+    this.authService.Signout();
   }
   /*openAuthModal(type: string){
     const AuthModalRef = this.modalService.open(AuthenticateComponent,
