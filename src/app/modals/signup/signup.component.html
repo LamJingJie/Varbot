@@ -1,63 +1,93 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"><button type="button" class="close" aria-label="Close"
+            (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>Sign Up
+    </h4>
+</div>
 
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"><button type="button" class="close" aria-label="Close"
-                (click)="closeModal()">
-                <span aria-hidden="true">&times;</span>
-            </button>Sign Up
-        </h4>
-    </div>
+<div class="modal-body">
+    <!--Sign Up Form-->
+    <form [formGroup]="signup_form" class="automate_details" (ngSubmit)="signup(signup_form.value)">
 
-    <div class="modal-body">
-        <!--Sign Up Form-->
-        <form [formGroup]="signup_form" class="automate_details" (ngSubmit)="signup(signup_form.value)">
-
-            <div class="signup_container">
-                <!--Email-->
-                <div class="email">
-                    <input formControlName="email" placeholder="email" type="email" class="email_input" />
-                </div>
-
-                <!--Name-->
-                <div class="name">
-                    <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
-                        <!---Tasks--->
-                        <!--#1: Finish the err msg for all this-->
-                        <div *ngIf="name?.errors?.required">
-                            Name is required.
-                        </div>
+        <div class="signup_container">
+            <!--Email-->
+            <div class="email">
+                <input formControlName="email" placeholder="email" type="email" class="email_input" />
+                <div id="validation_err_msg" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                    <div *ngIf="email?.errors?.required">
+                        *Email is required.
                     </div>
-
-                    <input formControlName="name" type="text" placeholder="Name" class="name_input" />
-                </div>
-
-                <!--Password(s)-->
-                <div class="password(s)">
-                    <div *ngIf="confirm_password?.invalid && (confirm_password?.dirty || confirm_password?.touched)">
-                        <div *ngIf="confirm_password?.errors?.required">Confirm Password is required</div>
-                        <div *ngIf="confirm_password?.errors?.mustMatch" style="padding: 10px;">Password and confirm not
-                            match</div>
+                    <div *ngIf="email?.errors?.email">
+                        *Invalid Email.
                     </div>
+                </div>  
+            </div>
 
-                    <input formControlName="password" type="password" class="password_input" placeholder="Password"
-                        class="automate_details_input input_text" />
+            <!--Name-->
+            <div class="name">
+                <input formControlName="name" type="text" placeholder="Name" class="name_input" />
+                <div id="validation_err_msg" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+                    <div *ngIf="name?.errors?.required">
+                        *Name is required.
+                    </div>
+                    <div *ngIf="name?.errors?.minlength">
+                        *Minimum of 3 characters.
+                    </div>
+                    <div *ngIf="name?.errors?.pattern">
+                        *Only letters are allowed.
+                    </div>
+                </div>           
+            </div>
 
-                    <input formControlName="confirm_password" type="password" class="confirm_password_input"
-                        placeholder="Confirm Password" class="automate_details_input input_text" />
+            <!--Password-->
+            <div class="password">
+                <input formControlName="password" type="password" class="password_input" placeholder="Password"/>
+
+                <div id="validation_err_msg" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                    <div *ngIf="password?.errors?.required">
+                        *Password required.
+                    </div>
+                    <div *ngIf="password?.errors?.minlength">
+                        *Minimum of 7 characters.
+                    </div>
+                    <div *ngIf="password?.errors?.maxlength">
+                        *Minimum of 64 characters.
+                    </div>
+                    <div *ngIf="password?.errors?.pattern">
+                        *At least one digit, one lowercase character, one uppercase character, one special character.
+                    </div>
                 </div>
-
             </div>
-            <div style="padding-top: 10px;">
-                <button type="submit" class="add_btn" [disabled]="!signup_form.valid">
-                    <div style="margin: auto;">Sign Up</div>
-                </button>
-            </div>
-        </form>
 
-        <!--Sign up by google-->
-        <div class="google">
-            <button>Google</button>
+             <!--Confirm Password-->
+            <div class="confirm_password">
+                <input formControlName="confirm_password" type="password" class="confirm_password_input"
+                placeholder="Confirm Password" />
+
+                <div id="validation_err_msg" *ngIf="confirm_password?.invalid && (confirm_password?.dirty || confirm_password?.touched)">
+                    <div *ngIf="confirm_password?.errors?.required">
+                        *Confirm Password is required
+                    </div>
+                    <div *ngIf="confirm_password?.errors?.mustMatch">
+                        *Password and confirm not match
+                    </div>                   
+                </div>
+            </div>
+
         </div>
+        <div style="padding-top: 10px;">
+            <button type="submit" class="add_btn" [disabled]="!signup_form.valid">
+                <div style="margin: auto;">Sign Up</div>
+            </button>
+        </div>
+    </form>
 
-        <button (click)="test()">test</button>
-        
+    <!--Sign up by google-->
+    <div class="google">
+        <button>Google</button>
     </div>
+
+    <button (click)="test()">test</button>
+
+</div>

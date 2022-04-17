@@ -7,13 +7,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <h2>Tasks</h2>
 <table>
 <tr>
-  1. Do the transition animations for the 'forgot-password' modal
+  <td>
+    1. Do the transition animations for the 'forgot-password' modal (done)
+  </td>
 </tr>
 <tr>
-  2. Design the modals relating to auth
+  <td>
+    2. Design the modals relating to auth 
+  </td>
 </tr>
 <tr>
-  3. Change 'forgot-password' modal closing icon to a 'back-arrow'
+  <td>
+    3. Change 'forgot-password' modal closing icon to a 'back-arrow' (done)
+  </td>
+</tr>
+<tr>
+  <td>
+    4. Add 'sign up' for google accounts
+  </td>
 </tr>
 </table>
 

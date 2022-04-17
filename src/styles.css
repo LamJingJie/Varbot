@@ -52,6 +52,42 @@ html, body{
     max-height: 70%;
 }
 
+/*Forgot password modal*/
+/*.ForgotPasswordModalClass div .modal-content{
+   position: absolute;
+   -webkit-animation: right_to_left 3.5s 1;
+   animation: right_to_left 3.5s 1;
+}
+
+
+@-webkit-keyframes right_to_left {
+    0% {
+      transform: translateX(15%);
+    }
+    14.28% {
+      transform: translateX(0);
+    }
+    85.71% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  @keyframes right_to_left {
+    0% {
+      transform: translateX(15%);
+    }
+    14.28% {
+      transform: translateX(0);
+    }
+    85.71% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }*/
 
 /*
 ::ng-deep *{

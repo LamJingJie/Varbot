@@ -54,9 +54,12 @@ export class HomeComponent implements OnInit {
 
   
 
-  constructor(private authService: AuthenticationService, private botServiceService: BotServiceService,private db: AngularFireDatabase, private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) {  this.modalOptions = {
-    backdropClass:'customBackdrop'
-  }}
+  constructor(private authService: AuthenticationService, private botServiceService: BotServiceService,private db: AngularFireDatabase, private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) 
+  {  
+    this.modalOptions = {
+      backdropClass:'customBackdrop'
+    }
+  }
 
   ngOnInit(){
     document.getElementById('selection_click')?.focus();

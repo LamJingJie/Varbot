@@ -1,32 +1,55 @@
 <!--Login Form-->
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title"><button type="button" class="close" aria-label="Close"
-                (click)="closeModal()">
-                <span aria-hidden="true">&times;</span>
-            </button>Login
-        </h4>
-    </div>
-    <div class="modal-body">
-        <form [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
 
-            <div>
-                <!--Email-->
-                <div class="email">
-                    <input type="email" formControlName="email" placeholder="Email" class="email_input" />
-                </div>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"><button type="button" class="close" aria-label="Close"
+            (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>Login
+    </h4>
+</div>
+<div class="modal-body">
+    <form [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
 
-                <!--Password-->
-                <div class="password">
-                    <input type="password" formControlName="password" placeholder="Password" class="password_input" />
+        <div class="input_fields">
+            <!--Email-->
+            <div class="email">
+                <input type="email" formControlName="email" placeholder="Email" class="email_input" />
+                <div id="validation_err_msg" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                    <div *ngIf="email?.errors?.required">
+                        *Email required.
+                    </div>
+                    <div *ngIf="email?.errors?.email">
+                        *Invalid Email.
+                    </div>
                 </div>
             </div>
-            <div style="padding-top: 10px;">
-                <button type="submit"  [disabled]="!login_form.valid">
-                    <div style="margin: auto;">Login</div>
-                </button>
+
+            <!--Password-->
+            <div class="password">
+                <input type="password" formControlName="password" placeholder="Password" class="password_input" />
+                <div id="validation_err_msg" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                    <div *ngIf="password?.errors?.required">
+                        *Password required.
+                    </div>
+                    <div *ngIf="password?.errors?.minlength">
+                        *Minimum of 7 characters.
+                    </div>
+                    <div *ngIf="password?.errors?.maxlength">
+                        *Minimum of 64 characters.
+                    </div>
+                    <div *ngIf="password?.errors?.pattern">
+                        *At least one digit, one lowercase character, one uppercase character, one special character.
+                    </div>
+                </div>
             </div>
-        </form>
-        <div class="forget_password_container">
-            <button (click)="forget_password()">Forgot password?</button>
         </div>
+        <div style="padding-top: 10px;">
+            <button type="submit" [disabled]="!login_form.valid">
+                <div style="margin: auto;">Login</div>
+            </button>
+        </div>
+    </form>
+    <div class="forget_password_container">
+        <button (click)="forget_password()">Forgot password?</button>
     </div>
+</div>

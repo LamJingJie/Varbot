@@ -9,16 +9,7 @@ import { UserService, User } from '../../../service/user.service';
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css'],
-  animations:[
-    trigger('slidelefttitle', [
-      transition('void => *', [
-        style({ opacity: 0, transform: 'translateX(150%)'}),
-        animate('900ms 300ms ease-out', style ({
-          transform: 'translateX(0%)', opacity: 1
-        }))
-      ])
-    ])
-  ]
+ 
 })
 export class ForgotPasswordComponent implements OnInit {
   forget_password_form: FormGroup;
@@ -28,7 +19,7 @@ export class ForgotPasswordComponent implements OnInit {
       email: new FormControl('', [
         Validators.email,
         Validators.required
-      ])
+      ]),
   
     });
    }

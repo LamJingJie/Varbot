@@ -1,0 +1,32 @@
+.modal-header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+/*EACH INPUT FIELD PARENT CONTAINER*/
+.email, .password{
+    padding: 10px;
+    width: 50%;
+    margin: auto;
+}
+
+/*INPUT FIELDS*/
+.email_input, .password_input{
+    border: 2px solid #59467D;
+    border-radius: 10px;
+    padding: 6px;
+    font-size: 14px;
+    width: 100%;
+    font-family: 'Consolas';
+}
+
+/*INPUT VALIDATION*/
+#validation_err_msg{
+    color: red;
+    font-size: 10px;
+    font-weight: bold;
+    width: 100%;
+}
