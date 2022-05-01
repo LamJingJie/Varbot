@@ -13,13 +13,14 @@ import { UserService, User } from '../../../service/user.service';
 })
 export class ForgotPasswordComponent implements OnInit {
   forget_password_form: FormGroup;
-  constructor(private userService: UserService, private modalService: NgbModal, private authService: AuthenticationService, private formBuilder: FormBuilder, public activeModal: NgbActiveModal) {
+  constructor(private userService: UserService, private modalService: NgbModal, private authService: AuthenticationService, private formBuilder: FormBuilder, public activeModal: NgbActiveModal) 
+  {
     this.forget_password_form = this.formBuilder.group({
     
       email: new FormControl('', [
         Validators.email,
         Validators.required
-      ]),
+      ])
   
     });
    }
@@ -41,6 +42,8 @@ export class ForgotPasswordComponent implements OnInit {
       }
     }))
   }
+
+  get email() { return this.forget_password_form.get('email'); }
 
   closeModal() {
     this.activeModal.close();

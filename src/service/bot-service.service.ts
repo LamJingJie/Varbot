@@ -18,7 +18,7 @@ export default class Bot {
 export class BotServiceService {
   realtimeDB_list: AngularFireList<Bot>;
   constructor(private authService: AuthenticationService, private store: AngularFirestore, private db: AngularFireDatabase) {
-    this.realtimeDB_list = db.list("user/" + this.authService.loginUserDetail); //User
+    this.realtimeDB_list = db.list("user/"); //User
   }
 
    /*Tasks

@@ -13,7 +13,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 </tr>
 <tr>
   <td>
-    2. Design the modals relating to auth 
+    2. Design the modals relating to auth (done)
   </td>
 </tr>
 <tr>
@@ -23,7 +23,27 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 </tr>
 <tr>
   <td>
-    4. Add 'sign up' for google accounts
+    4. Add 'sign up' for google accounts (done)
+  </td>
+</tr>
+<tr>
+  <td>
+    5. Add save function for bots that updates the firebase realtime db
+  </td>
+</tr>
+<tr>
+  <td>
+    6. Only allow logged in user to save
+  </td>
+</tr>
+<tr>
+  <td>
+    7. Add 'name' field for bots that allows user to name their saved bots 
+  </td>
+</tr>
+<tr>
+  <td>
+    8. Add saved bots modal and add logo for the btn for that modal
   </td>
 </tr>
 </table>

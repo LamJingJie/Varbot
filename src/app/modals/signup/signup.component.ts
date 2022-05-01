@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
           //At least one uppercase character
           //At least one special character
           //At least 7 characters in length, but no more than 32.
-          Validators.pattern('(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@]+'),
+          Validators.pattern('(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@$!#^~%*?&,.<>"\'\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]]+'),
           Validators.required,
           Validators.minLength(7),
           Validators.maxLength(32)
@@ -67,6 +67,8 @@ export class SignupComponent implements OnInit {
       this.closeModal();
     });
   }
+
+
 
   closeModal() {
     this.activeModal.close();

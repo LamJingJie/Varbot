@@ -395,6 +395,7 @@ export class HomeComponent implements OnInit {
   account(){
     //#1: Show both their bots and name changing option in a modal
     console.log('account');
+    console.log(JSON.parse(localStorage.getItem('user')!));
   }
 
   login(){
@@ -467,7 +468,16 @@ export class HomeComponent implements OnInit {
         this.popup_msg(err);
       }));
   }*/
+
+  //Get
+  get loggedIn(){
+    return this.authService.isLoggedIn;
   }
+  get user(){
+
+    return this.authService.loginUserDetail;
+  }
+}
   
 
 

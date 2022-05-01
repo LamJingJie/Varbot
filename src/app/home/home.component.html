@@ -30,20 +30,21 @@
                     <div style="display:flex; border-bottom: 1px solid #59467D;" class="account" mat-menu-item>
                         <div style="margin: auto;">
                             Currently 
-                            <b style="color: #47BB8C;">Logged In</b>
+                            <b *ngIf="loggedIn" style="color: #47BB8C;">Logged In</b>
+                            <b *ngIf="!loggedIn" style="color: #bb4747;">Logged Out</b>
                         </div>                    
                     </div>
-                    <button (click)="account()" id="menu-item" mat-menu-item>
+                    <button *ngIf="loggedIn" (click)="account()" id="menu-item" mat-menu-item>
                         <mat-icon>account_box</mat-icon>
-                        <span>Lam Jing Jie Mr JJ test extra data</span>
+                        <span>{{user.displayName}}</span>
                     </button>
-                    <button (click)="login()" id="menu-item" mat-menu-item>
+                    <button *ngIf="!loggedIn" (click)="login()" id="menu-item" mat-menu-item>
                         <span>Login</span>
                     </button>
-                    <button (click)="signup()" id="menu-item" mat-menu-item>
+                    <button *ngIf="!loggedIn" (click)="signup()" id="menu-item" mat-menu-item>
                         <span>Sign Up</span>
                     </button>
-                    <button (click)="logout()" id="menu-item" mat-menu-item>
+                    <button *ngIf="loggedIn" (click)="logout()" id="menu-item" mat-menu-item>
                         <span>Logout</span>
                     </button>
                 </mat-menu>          
@@ -71,11 +72,11 @@
         </div>       
     </div>
 
-    <!--Section 2: Commands area/section-->
+    <!--Section 2: Commands area/sections-->
     <div class="automate_section" style="padding-right: 20px;">      
         <div class="left" style="display: block;">
             <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
-                <h2 class="automation_step_title">Automation Steps <button (click)="Save()">Save</button> <img *ngIf="bot_codes.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
+                <h2 class="automation_step_title">Automation Steps <button *ngIf="loggedIn" (click)="Save()">Save</button> <img *ngIf="bot_codes.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
                 <div class="automation_step_details">
                     <!--Automation steps list-->
                     <div class="automation_steps">

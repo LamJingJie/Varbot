@@ -1,5 +1,4 @@
 <!--Login Form-->
-
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title"><button type="button" class="close" aria-label="Close"
             (click)="closeModal()">
@@ -7,7 +6,7 @@
         </button>Login
     </h4>
 </div>
-<div class="modal-body">
+<div class="modal-body" >
     <form [formGroup]="login_form" (ngSubmit)="login(login_form.value)">
 
         <div class="input_fields">
@@ -27,6 +26,9 @@
             <!--Password-->
             <div class="password">
                 <input type="password" formControlName="password" placeholder="Password" class="password_input" />
+                <div class="forget_password_container btn">
+                    <button type="button" class="forget_btn" (click)="forget_password()">Forgot password?</button>
+                </div>
                 <div id="validation_err_msg" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
                     <div *ngIf="password?.errors?.required">
                         *Password required.
@@ -41,15 +43,22 @@
                         *At least one digit, one lowercase character, one uppercase character, one special character.
                     </div>
                 </div>
+               
             </div>
         </div>
-        <div style="padding-top: 10px;">
-            <button type="submit" [disabled]="!login_form.valid">
+        <div style="padding-top: 10px;" class="login_container btn">
+            <button class="btn" style="font-size: 16px;" type="submit" [disabled]="!login_form.valid">
                 <div style="margin: auto;">Login</div>
             </button>
         </div>
     </form>
-    <div class="forget_password_container">
-        <button (click)="forget_password()">Forgot password?</button>
-    </div>
+
+     <!--Sign up using google-->
+     <div class="second_section">
+        <div style="padding: 5px;">OR</div>
+        <div class="google">
+            <button style="font-size: 12px;" type="button" class="btn" (click)="google()">By Google?</button>
+        </div>
+    </div> 
+   
 </div>

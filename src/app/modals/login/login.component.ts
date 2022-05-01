@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         //At least one uppercase character
         //At least one special character
         //At least 8 characters in length, but no more than 64.
-        Validators.pattern('(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@]+'),
+        Validators.pattern('(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@$!#^~%*?&,.<>"\'\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]]+'),
         Validators.required,
         Validators.minLength(7),
         Validators.maxLength(64)
@@ -45,6 +45,13 @@ export class LoginComponent implements OnInit {
     
     //console.log(userData);
     this.authService.login(val.email, val.password).then((res=>{
+      this.closeModal();
+    }));
+  }
+
+  google(){
+    this.authService.GoogleAuth().then((res=>{
+      console.log("Google Login")
       this.closeModal();
     }));
   }

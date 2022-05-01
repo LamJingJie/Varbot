@@ -18,7 +18,7 @@
     border: 2px solid #59467D;
     border-radius: 10px;
     padding: 6px;
-    font-size: 14px;
+    font-size: 16px;
     width: 100%;
     font-family: 'Consolas';
 }
@@ -29,4 +29,57 @@
     font-size: 10px;
     font-weight: bold;
     width: 100%;
+}
+
+
+/*Btn*/
+.login_container{
+    display: flex;
+    justify-content: center;
+}
+
+.forget_password_container{
+    padding: 0;
+    margin: 0;
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forget_btn{
+    background: none;
+    border: none;
+    box-shadow: none;
+    font-size: 11px;
+    padding: 0;
+    margin: 0;
+}
+
+.forget_btn:hover{
+    color: rgb(65, 65, 223);
+}
+
+/*2nd section*/
+.second_section{
+    text-align: center;
+}
+
+/*btn*/
+.btn{
+    display: flex;
+    margin: auto;
+    background: none;
+    border: none;
+    font-family: 'Consolas';
+    padding: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: default;
+}
+
+.btn:hover:enabled{
+    background: #47BB8C;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
 }

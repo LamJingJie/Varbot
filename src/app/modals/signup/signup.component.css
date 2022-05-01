@@ -1,3 +1,11 @@
+.modal-header{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 0;
+    margin: 0;
+}
+
 /*EACH INPUT FIELD PARENT CONTAINER*/
 .email, .password, .confirm_password, .name{
     padding: 10px;
@@ -22,3 +30,29 @@
     font-weight: bold;
     width: 100%;
 }
+
+/*2nd section*/
+.second_section{
+    text-align: center;
+}
+
+/*btn*/
+.btn{
+    display: flex;
+    margin: auto;
+    background: none;
+    border: none;
+    font-family: 'Consolas';
+    padding: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: default;
+}
+
+.btn:hover:enabled{
+    background: #47BB8C;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}
+

@@ -17,7 +17,7 @@ export class AuthenticationService {
 
     //It to be run whenever there is a change in the user
     this.afAuth.authState.subscribe((user=>{
-      console.log(user);
+      //console.log(user);
       if(user){
         localStorage.setItem('user', JSON.stringify(user));
         console.log("Logged in");
@@ -51,6 +51,31 @@ export class AuthenticationService {
     })
   }
 
+  GoogleAuth(){
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+      if (res) {
+        console.log("Signed up successfully");
+      }
+    });
+  }
+
+  // Auth logic to run auth providers (e.g. Google, Facebook, etc)
+  AuthLogin(provider: any) {
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then((result) => {
+        let userData: User ={
+          name: result.user?.displayName!,
+          email: result.user?.email!
+        }
+        //console.log(userData);
+        this.userService.create(userData, result.user?.uid);
+      })
+      .catch((error) => {
+        window.alert(error);
+      });
+  }
+
   async resetPassword(email: string){
    // this.afAuth.get
    console.log(email);
@@ -68,7 +93,7 @@ export class AuthenticationService {
     return user !== null ? true : false;
   }
 
-  get loginUserDetail(): string {
+  get loginUserDetail(): any {
     return JSON.parse(localStorage.getItem('user')!);
   }
 

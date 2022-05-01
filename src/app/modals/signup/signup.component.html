@@ -70,24 +70,19 @@
                         *Confirm Password is required
                     </div>
                     <div *ngIf="confirm_password?.errors?.mustMatch">
-                        *Password and confirm not match
+                        *Password and Confirm not match
                     </div>                   
                 </div>
             </div>
 
         </div>
         <div style="padding-top: 10px;">
-            <button type="submit" class="add_btn" [disabled]="!signup_form.valid">
+            <button type="submit" class="btn" style="font-size: 16px;" [disabled]="!signup_form.valid">
                 <div style="margin: auto;">Sign Up</div>
             </button>
         </div>
     </form>
 
-    <!--Sign up by google-->
-    <div class="google">
-        <button>Google</button>
-    </div>
-
-    <button (click)="test()">test</button>
+   
 
 </div>
