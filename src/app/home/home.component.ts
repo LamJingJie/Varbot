@@ -5,8 +5,10 @@ import { BotsService } from '../shared/bots.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
+import { FirstSaveComponent } from "../modals/first-save/first-save.component";
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { LoginComponent } from "../modals/login/login.component";
+import { YourbotComponent } from "../modals/yourbot/yourbot.component";
 import { SignupComponent } from "../modals/signup/signup.component";
 
 //Services 
@@ -41,9 +43,8 @@ export class HomeComponent implements OnInit {
   url_section:boolean = false;
 
   selected_option= '';
-
-  bot_codes: string[] = [];
-  bot_code_name: string[] = [];//for the display on the left of the 2nd section
+  
+  bot_id: string | undefined;
   //bot_codes: string[] = ["await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});", "await page.waitForSelector('input[name=email]'); await page.$eval('input[name=email]', el => el.value = 'jingjie105@hotmail.com');", "await page.$eval('input[id=m_login_password]', el => el.value = 'Gendensuikoden12!');"];
 
   //Store the previous highlighted ID
@@ -64,6 +65,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(){
     document.getElementById('selection_click')?.focus();
     this.selection_btn('CLICK');
+    this.bot.lists_desc
   }
 
   //Change btn background permanently when clicked.
@@ -133,14 +135,17 @@ export class HomeComponent implements OnInit {
     //console.log(code);
     //console.log(url);
     //console.log(code);
-    this.bot_codes[0] = code;
-    this.bot_code_name[0] = 'Open to ' +'"'+ url.href + '"';
-    let last_index = this.bot_codes.lastIndexOf(code);
-    console.log(last_index);
+    //this.bot_codes[0] = code;
+    this.bot.lists_code![0] = code;
+    //this.bot_code_name[0] = 'Open to ' +'"'+ url.href + '"';
+    this.bot.lists_desc![0] = 'Open to ' +'"'+ url.href + '"';
+    //let last_index = this.bot_codes.lastIndexOf(code);
+    let last_index = this.bot.lists_code!.lastIndexOf(code);
+    //console.log(last_index);
     this.highlight_steps(last_index);
     //this.set_Style_For_Instruction_Steps_Last_Item();
     //console.log(this.bot_code_name);
-    console.log(this.bot_codes);
+    //console.log(this.bot_codes);
     /*this.botService.runBots(this.bot_codes).then((result: any)=>{
       console.log(result);
     });*/
@@ -151,12 +156,12 @@ export class HomeComponent implements OnInit {
   async add_code(val: any){
     //console.log(val);
     //console.log(this.selected_option);
-    if(this.bot_codes.length <= 0){
+    if(this.bot.lists_code!.length <= 0){
       this.popup_msg("Please provide the WEBSITE URL to continue.");
       return
     }
 
-    if(this.bot_code_name.includes('Bot ends here')){
+    if(this.bot.lists_desc!.includes('Bot ends here')){
       this.popup_msg("No adding of instructions after you have ended it.");
       return
     }
@@ -172,11 +177,11 @@ export class HomeComponent implements OnInit {
       
       //console.log(waitForSelector);
       //console.log(click);
-      this.bot_codes.splice(this.current_id_selected + 1, 0, waitForSelector + click);
+      this.bot.lists_code!.splice(this.current_id_selected + 1, 0, waitForSelector + click);
       //this.bot_codes.push(waitForSelector + click);
-      this.bot_code_name.splice(this.current_id_selected + 1, 0, 'Click on ' + '"'+ val['enter_input'] + '"')
-      console.log(this.bot_codes);
-      console.log(this.current_id_selected);
+      this.bot.lists_desc!.splice(this.current_id_selected + 1, 0, 'Click on ' + '"'+ val['enter_input'] + '"')
+      //console.log(this.bot_codes);
+      //console.log(this.current_id_selected);
       //console.log(this.bot_code_name);
       //await this.set_Style_For_Instruction_Steps_Last_Item();
       return;
@@ -193,8 +198,8 @@ export class HomeComponent implements OnInit {
       //console.log(eval_var);
 
       //Added +1 so that it will push the new item below the top item
-      this.bot_codes.splice(this.current_id_selected + 1, 0, waitForSelector + eval_var);
-      this.bot_code_name.splice(this.current_id_selected + 1, 0,'Go to ' + val['enter_input'] + ' input field & type ' +'"' + val['enter_text'] + '"');
+      this.bot.lists_code!.splice(this.current_id_selected + 1, 0, waitForSelector + eval_var);
+      this.bot.lists_desc!.splice(this.current_id_selected + 1, 0,'Go to ' + val['enter_input'] + ' input field & type ' +'"' + val['enter_text'] + '"');
       //console.log(this.bot_codes);
       //console.log(this.bot_code_name);
       //await this.set_Style_For_Instruction_Steps_Last_Item();
@@ -208,8 +213,8 @@ export class HomeComponent implements OnInit {
       }
       let screenshot = "await page.screenshot({fullPage: true, path: " + '"' + val['enter_path'] + '.png"}' + ");";
       //console.log(screenshot);
-      this.bot_codes.splice(this.current_id_selected + 1, 0,screenshot);
-      this.bot_code_name.splice(this.current_id_selected + 1, 0,'Screenshot file name is ' +'"' +  val['enter_path'] + '"');
+      this.bot.lists_code!.splice(this.current_id_selected + 1, 0,screenshot);
+      this.bot.lists_desc!.splice(this.current_id_selected + 1, 0,'Screenshot file name is ' +'"' +  val['enter_path'] + '"');
       //console.log(this.bot_codes);
       //await this.set_Style_For_Instruction_Steps_Last_Item();
       return
@@ -218,8 +223,8 @@ export class HomeComponent implements OnInit {
       //bot code
       let end = "await page.close();";
       //console.log(end);
-      this.bot_codes.push(end);
-      this.bot_code_name.push('Bot ends here');
+      this.bot.lists_code!.push(end);
+      this.bot.lists_desc!.push('Bot ends here');
       //console.log(this.bot_codes);
       //await this.set_Style_For_Instruction_Steps_Last_Item();
       return
@@ -232,7 +237,7 @@ export class HomeComponent implements OnInit {
   async run_bot(){
     console.log('bot run');
     await this.spinner.show('bot');
-    this.botService.runBots(this.bot_codes).then((result: any)=>{
+    this.botService.runBots(this.bot.lists_code!).then((result: any)=>{
       console.log(result);
       this.spinner.hide('bot');
     }).catch(err=>{
@@ -261,7 +266,6 @@ export class HomeComponent implements OnInit {
   //when user clicks on delete steps
   openDeletePopup(index: number, steps: string){
     //console.log("Delete " + index);
-    //#TASK1: Add popup box for confirmation
     const deleteModalRef = this.modalService.open(DeleteModalComponent,
       {
         scrollable:true,
@@ -271,8 +275,8 @@ export class HomeComponent implements OnInit {
     let data: any = {
       delete_index: index,
       delete_step: steps,
-      steps_array: this.bot_codes,
-      steps_array_name: this.bot_code_name
+      steps_array: this.bot.lists_code,
+      steps_array_name: this.bot.lists_desc
     }
 
     deleteModalRef.componentInstance.fromParent = data;
@@ -285,8 +289,8 @@ export class HomeComponent implements OnInit {
 
       //update array
       this.spinner.show("del");
-      this.bot_codes = result.steps_array;
-      this.bot_code_name = result.steps_array_name;
+      this.bot.lists_code = result.steps_array;
+      this.bot.lists_desc = result.steps_array_name;
       
       //highlight the step above
       if(index > 0){
@@ -361,12 +365,50 @@ export class HomeComponent implements OnInit {
     let getAll_Subscription: Subscription;
     let dateTime = Date.now();
 
-    this.bot.lists_code = this.bot_codes;
-    this.bot.lists_desc = this.bot_code_name;
     this.bot.last_saved = dateTime;
-    //console.log(this.bot);
-    this.botServiceService.add(this.bot);
+    
+    console.log(this.bot_id);
 
+    //If user isn't logged in
+    if(!this.loggedIn){
+      this.popup_msg("Login to save");
+      return;
+    }
+
+    if(this.bot_id === undefined){
+      //New bot
+      const firstSaveModalRef = this.modalService.open(FirstSaveComponent,
+        {
+          scrollable: true,
+          windowClass: 'firstSave'
+        });
+  
+      firstSaveModalRef.componentInstance.fromParent = this.bot;
+      firstSaveModalRef.result.then(async (result) => {
+        //console.log(result);
+        //console.log("1st save");
+
+        if (result === null || result === '' || result === undefined || result === 'close') {
+          return;
+        }
+
+        //If data is returned
+        this.bot_id = result.bot_id;
+        this.bot.name = result.bot_name;
+        
+      }, (reason) => {
+        console.log('reason: ' + reason);
+      }).catch((err=>{
+        this.popup_msg(err);
+      }));
+
+    }else{
+      //Subsequent saves to the bot
+      //console.log("Alrdy saved");
+      this.botServiceService.update(this.bot_id, this.bot);
+      this.popup_msg('Bot ' +'"' + this.bot.name + '"' + " is updated.");
+    }
+      
     /*this.botServiceService.get("-Mz4iriVgjbuAGXpqMe6").then(snapshot=>{
       console.log(snapshot.val());
       console.log(snapshot.key);
@@ -385,17 +427,35 @@ export class HomeComponent implements OnInit {
     //this.botServiceService.update("-Mz4iriVgjbuAGXpqMe6",this.bot);
 
     //console.log(this.botServiceService.get("-Mz4iriVgjbuAGXpqMe6"));
-    
   }
 
+  YourBots(){
+    console.log("Your bots")
+    //# Retrieve all saved bots and display in the popup modal
 
+    const yourBotModalRef = this.modalService.open(YourbotComponent,
+      {
+        scrollable: true,
+        windowClass: 'yourBotModalClass'
+      });
+
+      yourBotModalRef.componentInstance.fromParent = this.user.uid;
+      yourBotModalRef.result.then(async (result) => {
+        console.log(result);
+  
+      }, (reason) => {
+        console.log(reason);
+      }).catch((err => {
+        this.popup_msg(err);
+      }));
+  }
 
   //Account related
 
   account(){
     //#1: Show both their bots and name changing option in a modal
     console.log('account');
-    console.log(JSON.parse(localStorage.getItem('user')!));
+    console.log(this.authService.loginUserDetail);
   }
 
   login(){

@@ -1,0 +1,53 @@
+.modal-header{
+    display: flex;
+    margin: auto;
+    padding-bottom: 0;
+}
+
+/*EACH INPUT FIELD PARENT CONTAINER*/
+.name{
+    padding: 10px;
+    width: 50%;
+    margin: auto;
+}
+
+/*INPUT FIELDS*/
+.name_input{
+    border: 2px solid #59467D;
+    border-radius: 10px;
+    padding: 6px;
+    font-size: 16px;
+    width: 100%;
+    font-family: 'Consolas';
+}
+
+/*INPUT VALIDATION*/
+#validation_err_msg{
+    color: red;
+    font-size: 10px;
+    font-weight: bold;
+    width: 100%;
+}
+
+
+/*btn*/
+.submit_btn{
+    display: flex;
+    margin: auto;
+    background: none;
+    border: none;
+    border: 2px solid #47BB8C;
+    border-radius: 10px;
+    font-family: 'Consolas';
+    font-size: 18px;
+    padding: 8px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.submit_btn:hover:enabled{
+    background: #47BB8C;
+    color: white;
+    transition: 0.5s;
+    cursor: pointer;
+}

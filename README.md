@@ -8,7 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <table>
 <tr>
   <td>
-    1. Do the transition animations for the 'forgot-password' modal (done)
+    1. Warn user when they try to refresh the page
   </td>
 </tr>
 <tr>
@@ -28,22 +28,27 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 </tr>
 <tr>
   <td>
-    5. Add save function for bots that updates the firebase realtime db
+    5. Add save function for bots that updates the firebase realtime db (done2)
   </td>
 </tr>
 <tr>
   <td>
-    6. Only allow logged in user to save
+    6. Only allow logged in user to save (done2)
   </td>
 </tr>
 <tr>
   <td>
-    7. Add 'name' field for bots that allows user to name their saved bots 
+    7. Add 'name' field for bots that allows user to name their saved bots (done2)
   </td>
 </tr>
 <tr>
   <td>
-    8. Add saved bots modal and add logo for the btn for that modal
+    8. Add saved bots modal and add logo for the btn for that modal (done2)
+  </td>
+</tr>
+<tr>
+  <td>
+    9. Add retrieve all function for user bots
   </td>
 </tr>
 </table>

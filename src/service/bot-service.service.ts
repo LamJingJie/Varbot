@@ -9,8 +9,8 @@ import { AuthenticationService } from '../service/authentication.service';
 export default class Bot {
   name?: string;
   last_saved?: number;
-  lists_code?: Array<any>;
-  lists_desc?: Array<any>;
+  lists_code?: Array<any> =[];
+  lists_desc?: Array<any> =[];
 }
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export default class Bot {
 export class BotServiceService {
   realtimeDB_list: AngularFireList<Bot>;
   constructor(private authService: AuthenticationService, private store: AngularFirestore, private db: AngularFireDatabase) {
-    this.realtimeDB_list = db.list("user/"); //User
+    this.realtimeDB_list = db.list("user/" + this.authService.loginUserDetail.uid + "/bots"); //User
   }
 
    /*Tasks
@@ -34,13 +34,13 @@ export class BotServiceService {
   }
 
   get(key: string){
-    return this.db.database.ref("user/" + key).get();
+    return this.db.database.ref("user/" + this.authService.loginUserDetail.uid + "/bots/" +  key).get();
   }
 
   add(bot: Bot){
     console.log(bot);
     //this.testRef2.push({title: {0: '1', 1: '2'}});
-    //return this.realtimeDB_list.push(bot);
+    return this.realtimeDB_list.push(bot);
   }
 
   update(key: string, bot: Bot){

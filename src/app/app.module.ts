@@ -28,6 +28,8 @@ import { MatIconModule } from'@angular/material/icon';
 import { SignupComponent } from './modals/signup/signup.component';
 import { LoginComponent } from './modals/login/login.component';
 import { ForgotPasswordComponent } from './modals/forgot-password/forgot-password.component';
+import { FirstSaveComponent } from './modals/first-save/first-save.component';
+import { YourbotComponent } from './modals/yourbot/yourbot.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { ForgotPasswordComponent } from './modals/forgot-password/forgot-passwor
     SignupComponent,
     LoginComponent,
     ForgotPasswordComponent,
+    FirstSaveComponent,
+    YourbotComponent,
 
   ],
   entryComponents:[

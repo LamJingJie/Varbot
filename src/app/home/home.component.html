@@ -76,12 +76,12 @@
     <div class="automate_section" style="padding-right: 20px;">      
         <div class="left" style="display: block;">
             <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
-                <h2 class="automation_step_title">Automation Steps <button *ngIf="loggedIn" (click)="Save()">Save</button> <img *ngIf="bot_codes.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
+                <h2 class="automation_step_title">Automation Steps<p *ngIf="bot.name!">({{bot.name!}})</p><button *ngIf="bot.lists_code!.length > 0" (click)="Save()">Save</button><button (click)="YourBots()">Your bots</button> <img *ngIf="bot.lists_code!.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
                 <div class="automation_step_details">
                     <!--Automation steps list-->
                     <div class="automation_steps">
                         <ul style="list-style-type: none; padding: 0;">
-                            <li style="display: flex; padding-bottom: 15px;"  *ngFor="let instruction of bot_code_name; let indexOfElement=index;">
+                            <li style="display: flex; padding-bottom: 15px;"  *ngFor="let instruction of bot.lists_desc; let indexOfElement=index;">
                                 <div [attr.id]="'instructionSteps_'+ indexOfElement">                              
                                     <div class="instruction_style_grid" [attr.id]="'highlightSteps_'+ indexOfElement"
                                         (click)="highlight_steps(indexOfElement)">
@@ -106,8 +106,6 @@
         <div class="right"  style="display: block;">
 
             <!--Tasks-->
-            <!--2. Add Login/Logout features-->
-            <!--3. Add Favourite feature-->
             <!--4. Ensure that when a saved bot is loaded, it will show a red dot whenever it has been
                     edited to remind users to save. And also a popup box warning them if they didn't-->
             

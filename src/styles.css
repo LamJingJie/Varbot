@@ -52,6 +52,10 @@ html, body{
     max-height: 70%;
 }
 
+.firstSave div .modal-content{
+  height: fit-content;
+}
+
 
 /*Forgot password modal*/
 /*.ForgotPasswordModalClass div .modal-content{
