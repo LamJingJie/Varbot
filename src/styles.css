@@ -30,6 +30,11 @@ html, body{
     background: #cbcacc;
 }
 
+/*To roughly center the list item in yourbot.html*/
+.mat-list-item-content{
+  padding-top: 10px!important;
+}
+
 /*popup Msg Styling*/
 .popup_msg{
     background: linear-gradient(to right, #59467D 30%, #47BB8C);

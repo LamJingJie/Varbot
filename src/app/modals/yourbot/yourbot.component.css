@@ -3,3 +3,39 @@
     margin: auto;
     padding-bottom: 0;
 }
+
+
+.bot_grid{
+    display: grid;
+    grid-template-columns: 1fr minmax(20%, 23%);
+    grid-template-rows: minmax(0%, 3vh) minmax(0%, 6vh);
+    
+}
+
+.id{
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 10px;
+    font-weight: lighter;
+}
+
+.name{
+    grid-column: 1;
+    grid-row: 2;
+    font-weight:400;
+    font-size: 16px;
+}
+
+.datetitle{
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 10px;
+    font-weight: lighter;
+}
+
+.date{
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 12px;
+}
+

@@ -441,8 +441,21 @@ export class HomeComponent implements OnInit {
 
       yourBotModalRef.componentInstance.fromParent = this.user.uid;
       yourBotModalRef.result.then(async (result) => {
-        console.log(result);
-  
+        
+        if (result === null || result === '' || result === undefined || result === 'close') {
+          return;
+        }
+        this.bot_id = result.key;
+        delete result.key 
+        //console.log(result);
+        //console.log(this.bot_id);
+        this.bot = result;
+
+        //highlight latest step
+        if(this.bot.lists_code?.length! > 0){
+          this.highlight_steps(this.bot.lists_code?.length! - 1);
+        }
+        
       }, (reason) => {
         console.log(reason);
       }).catch((err => {

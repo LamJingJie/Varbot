@@ -13,42 +13,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 </tr>
 <tr>
   <td>
-    2. Design the modals relating to auth (done)
+    2. Add retrieve all function for user bots (done)
   </td>
 </tr>
 <tr>
   <td>
-    3. Change 'forgot-password' modal closing icon to a 'back-arrow' (done)
+    3. Add deleting of bots function
   </td>
 </tr>
 <tr>
   <td>
-    4. Add 'sign up' for google accounts (done)
-  </td>
-</tr>
-<tr>
-  <td>
-    5. Add save function for bots that updates the firebase realtime db (done2)
-  </td>
-</tr>
-<tr>
-  <td>
-    6. Only allow logged in user to save (done2)
-  </td>
-</tr>
-<tr>
-  <td>
-    7. Add 'name' field for bots that allows user to name their saved bots (done2)
-  </td>
-</tr>
-<tr>
-  <td>
-    8. Add saved bots modal and add logo for the btn for that modal (done2)
-  </td>
-</tr>
-<tr>
-  <td>
-    9. Add retrieve all function for user bots
+    4. Add clear function that clears the selected bot. Allow user to save new bot
   </td>
 </tr>
 </table>
