@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
     enter_website: new FormControl(''),
   });
 
-  bot: Bot = new Bot();
   automation_section_form = new FormGroup({
     
     enter_input: new FormControl(''),
@@ -39,11 +38,11 @@ export class HomeComponent implements OnInit {
 
   });
   modalOptions:NgbModalOptions;
-
   url_section:boolean = false;
 
   selected_option= '';
-  
+
+  bot: Bot = new Bot();
   bot_id: string | undefined;
   //bot_codes: string[] = ["await page.goto('https://touch.facebook.com/?_rdr', {waitUntil:'networkidle0',});", "await page.waitForSelector('input[name=email]'); await page.$eval('input[name=email]', el => el.value = 'jingjie105@hotmail.com');", "await page.$eval('input[id=m_login_password]', el => el.value = 'Gendensuikoden12!');"];
 
@@ -53,7 +52,12 @@ export class HomeComponent implements OnInit {
   //ID of the currently selected index/id
   current_id_selected: number = -1;
 
-  
+  //Check if there's any changes made by the user before saving
+  changes: boolean = false;
+  beforeUnloadListener = (event: any) => {
+    event.preventDefault();
+    return event.returnValue = "Are you sure you want to exit?";
+  };
 
   constructor(private authService: AuthenticationService, private botServiceService: BotServiceService,private db: AngularFireDatabase, private spinner: NgxSpinnerService, private snackBar: MatSnackBar, private modalService: NgbModal, private cdRef:ChangeDetectorRef, private botService: BotsService) 
   {  
@@ -65,7 +69,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(){
     document.getElementById('selection_click')?.focus();
     this.selection_btn('CLICK');
-    this.bot.lists_desc
+    console.log(this.bot);
+
+    //Warn the user if there's any unsaved data
+    
+    
   }
 
   //Change btn background permanently when clicked.
@@ -143,6 +151,8 @@ export class HomeComponent implements OnInit {
     let last_index = this.bot.lists_code!.lastIndexOf(code);
     //console.log(last_index);
     this.highlight_steps(last_index);
+    this.changes = true;
+    addEventListener("beforeunload", this.beforeUnloadListener, {capture: true});
     //this.set_Style_For_Instruction_Steps_Last_Item();
     //console.log(this.bot_code_name);
     //console.log(this.bot_codes);
@@ -165,6 +175,9 @@ export class HomeComponent implements OnInit {
       this.popup_msg("No adding of instructions after you have ended it.");
       return
     }
+
+    this.changes = true;
+    addEventListener("beforeunload", this.beforeUnloadListener, {capture: true});
 
     if(this.selected_option==="CLICK"){
       //bot code
@@ -228,9 +241,7 @@ export class HomeComponent implements OnInit {
       //console.log(this.bot_codes);
       //await this.set_Style_For_Instruction_Steps_Last_Item();
       return
-    }
-
-    
+    }    
   }
 
   //Run the steps for the bot
@@ -291,6 +302,8 @@ export class HomeComponent implements OnInit {
       this.spinner.show("del");
       this.bot.lists_code = result.steps_array;
       this.bot.lists_desc = result.steps_array_name;
+      this.changes = true;
+      addEventListener("beforeunload", this.beforeUnloadListener, {capture: true});
       
       //highlight the step above
       if(index > 0){
@@ -368,13 +381,13 @@ export class HomeComponent implements OnInit {
     this.bot.last_saved = dateTime;
     
     console.log(this.bot_id);
-
+    
     //If user isn't logged in
     if(!this.loggedIn){
       this.popup_msg("Login to save");
       return;
     }
-
+    
     if(this.bot_id === undefined){
       //New bot
       const firstSaveModalRef = this.modalService.open(FirstSaveComponent,
@@ -395,6 +408,8 @@ export class HomeComponent implements OnInit {
         //If data is returned
         this.bot_id = result.bot_id;
         this.bot.name = result.bot_name;
+        this.changes = false; //reset
+        removeEventListener("beforeunload", this.beforeUnloadListener, {capture: true});
         
       }, (reason) => {
         console.log('reason: ' + reason);
@@ -406,6 +421,8 @@ export class HomeComponent implements OnInit {
       //Subsequent saves to the bot
       //console.log("Alrdy saved");
       this.botServiceService.update(this.bot_id, this.bot);
+      this.changes = false; //reset
+      removeEventListener("beforeunload", this.beforeUnloadListener, {capture: true});
       this.popup_msg('Bot ' +'"' + this.bot.name + '"' + " is updated.");
     }
       
@@ -463,8 +480,19 @@ export class HomeComponent implements OnInit {
       }));
   }
 
-  //Account related
+  //Creates a new slate
+  new(){
+    window.location.reload();
+  }
 
+  //Checks if there's any unsaved data
+  get data_changes(){
+    return this.changes;
+  }
+
+
+
+  //Account related
   account(){
     //#1: Show both their bots and name changing option in a modal
     console.log('account');
@@ -483,7 +511,6 @@ export class HomeComponent implements OnInit {
 
       LoginModalRef.result.then(async (result) => {
       console.log(result);
-
 
     }, (reason) => {
       console.log(reason);

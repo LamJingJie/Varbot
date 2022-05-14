@@ -253,18 +253,47 @@
 }
 
 
-
 .automation_step_title{
     font-family: 'Consolas';
     width: 100%;
-    display: flex;
     margin: auto;
     grid-column: 1;
     grid-row: 2;
-    display: flex;
-    justify-content: center;
+    text-align: center;
     padding-top: 20px;
 }
+
+.as_title_btn{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#save_icon:hover{
+    cursor: pointer;
+}
+
+.as_title_btn button{
+    font-size: 14px;
+    background: none;
+    border: 1px solid #47BB8C;
+    border-radius: 30px;
+}
+
+.as_title_btn button:hover{
+    background-color: #47BB8C;
+    color: white;
+}
+
+.as_title_desc{
+    display: flex;
+    justify-content: center;
+}
+
+.as_title_desc p{
+    margin: auto;
+}
+
 .playbtn{
     height: 30px;
     padding: 5px;

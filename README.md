@@ -8,7 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <table>
 <tr>
   <td>
-    1. Warn user when they try to refresh the page
+    1. Warn user when they try to refresh the page (done)
   </td>
 </tr>
 <tr>
@@ -23,7 +23,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 </tr>
 <tr>
   <td>
-    4. Add clear function that clears the selected bot. Allow user to save new bot
+    4. Show modal consisting of email, creation date & username when clicked on user profile
+  </td>
+</tr>
+<tr>
+  <td>
+    5. Add clear function that clears the selected bot. Allow user to save new bot (done)
   </td>
 </tr>
 </table>

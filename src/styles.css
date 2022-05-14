@@ -61,6 +61,15 @@ html, body{
   height: fit-content;
 }
 
+/*Angular Material Badge Custom Colors*/
+.warn .mat-badge-content{
+  background: red;
+}
+
+.green .mat-badge-content{
+  background: rgb(2, 215, 2);
+}
+
 
 /*Forgot password modal*/
 /*.ForgotPasswordModalClass div .modal-content{

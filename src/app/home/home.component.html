@@ -76,7 +76,17 @@
     <div class="automate_section" style="padding-right: 20px;">      
         <div class="left" style="display: block;">
             <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
-                <h2 class="automation_step_title">Automation Steps<p *ngIf="bot.name!">({{bot.name!}})</p><button *ngIf="bot.lists_code!.length > 0" (click)="Save()">Save</button><button (click)="YourBots()">Your bots</button> <img *ngIf="bot.lists_code!.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></h2>
+                <h2 class="automation_step_title">
+                        <div class="as_title_btn">
+                            <button *ngIf="bot_id" (click)="new()">Create Brand New</button>                                   
+                            <button (click)="YourBots()">Your bots</button> 
+                            <mat-icon *ngIf="bot.lists_code!.length > 0" (click)="Save()" matBadge="&#8288;" matBadgeSize="small" id="save_icon"  [ngClass] = "changes ? 'warn' :'green'">save</mat-icon>
+                        </div>
+                        <div class="as_title_desc">
+                            <p *ngIf="!bot.name!">Automation Steps<img *ngIf="bot.lists_code!.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></p>
+                            <p *ngIf="bot.name!">{{bot.name!}}  <img *ngIf="bot.lists_code!.length > 0"  (click)="run_bot()" class="playbtn" alt="play_arrow" src="/assets/play_arrow.png"/></p>                     
+                        </div>                                  
+                </h2>
                 <div class="automation_step_details">
                     <!--Automation steps list-->
                     <div class="automation_steps">

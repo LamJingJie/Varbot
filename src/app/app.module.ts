@@ -26,6 +26,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from'@angular/material/icon';
 import { MatListModule } from '@angular/material/list'
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { SignupComponent } from './modals/signup/signup.component';
 import { LoginComponent } from './modals/login/login.component';
@@ -66,6 +67,7 @@ import { YourbotComponent } from './modals/yourbot/yourbot.component';
     MatIconModule,
     FormsModule,
     MatListModule,
+    MatBadgeModule,
     MatMenuModule,
     MatSnackBarModule,
     MatTooltipModule,
