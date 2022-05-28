@@ -5,6 +5,7 @@ import  Bot  from 'src/service/bot-service.service';
 import { AuthenticationService } from 'src/service/authentication.service';
 import { UserService } from 'src/service/user.service';
 import {User} from 'src/service/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,7 @@ export class ProfileComponent implements OnInit {
   user: any;
   edited: boolean | undefined;
 
-  constructor(private userService: UserService,private authService: AuthenticationService, private botService: BotServiceService, public activeModal: NgbActiveModal) { }
+  constructor(private snackBar: MatSnackBar, private userService: UserService,private authService: AuthenticationService, private botService: BotServiceService, public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
     this.edited = false;
@@ -33,11 +34,15 @@ export class ProfileComponent implements OnInit {
       email: this.user.email
     }
     //console.log(user);
-    this.authService.updateProfile(user).then((res=>{
-      this.edited = false;
-    }));
     this.userService.update(this.user.uid, user);
+    this.authService.updateProfile(user);
+    this.edited = false;
+    this.popup_msg("Profile Updated!");
     
+  }
+
+  popup_msg(msg: string){
+    this.snackBar.open(msg,"Close", {duration: 5000, panelClass: "popup_msg"})
   }
 
   closeModal(){

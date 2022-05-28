@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BotServiceService } from 'src/service/bot-service.service';
 import  Bot  from 'src/service/bot-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-first-save',
@@ -12,7 +13,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class FirstSaveComponent implements OnInit {
   @Input() fromParent: Bot | undefined;
   first_save_form: FormGroup;
-  constructor(private botService: BotServiceService, public activeModal: NgbActiveModal,private formBuilder: FormBuilder,) {
+  constructor(private snackBar: MatSnackBar, private botService: BotServiceService, public activeModal: NgbActiveModal,private formBuilder: FormBuilder,) {
     this.first_save_form = this.formBuilder.group({
     
       name: new FormControl('', [
@@ -36,9 +37,8 @@ export class FirstSaveComponent implements OnInit {
         bot_id: res.key
       }
       //console.log(res);
+      this.popup_msg("Bot Saved");
       this.closeModal(data);
-      //Tasks:
-      //#1: Store the bot UID in a variable and return it and update the 'bot_uid' variable at 'home.ts'
       
     }));
    
@@ -47,6 +47,10 @@ export class FirstSaveComponent implements OnInit {
   closeModal(val: any) {
     this.activeModal.close(val);
     //console.log('close');
+  }
+
+  popup_msg(msg: string){
+    this.snackBar.open(msg,"Close", {duration: 5000, panelClass: "popup_msg"})
   }
 
   get name(){

@@ -8,27 +8,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <table>
 <tr>
   <td>
-    1. Warn user when they try to refresh the page (done)
+    1. Design the user profile modal(done)
   </td>
 </tr>
 <tr>
   <td>
-    2. Add retrieve all function for user bots (done)
+    2. Add popup msg for successful attempts in CRUD (done)
   </td>
 </tr>
 <tr>
   <td>
-    3. Add deleting of bots function (done)
-  </td>
-</tr>
-<tr>
-  <td>
-    4. Show modal consisting of email, creation date & username when clicked on user profile (done)
-  </td>
-</tr>
-<tr>
-  <td>
-    5. Add clear function that clears the selected bot. Allow user to save new bot (done)
+    3. Added auto scrolldown to next section feature (done)
   </td>
 </tr>
 </table>

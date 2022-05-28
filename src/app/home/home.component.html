@@ -18,7 +18,7 @@
                 <div class="aboutus_detail">
                     We help users automate most websites efficiently & effectively, saving time in the long run
                 </div>
-                <button class="aboutus_btn">
+                <button class="aboutus_btn" (click)="scrollToDestination1st(FirstSection)">
                     Get Started...
                 </button>
             </div>     
@@ -53,17 +53,17 @@
     </div>
 
     <!--Section 1: Adding of website URL form-->
-    <div class="url_section" style="padding-left: 20px;"> 
+    <div #FirstSection class="url_section" style="padding-left: 20px;"> 
         <div class="left" style="display: block;">
             <div class="number_border"><p class="number">1</p></div>
-            <form [formGroup]="url_section_form" class="url_details" (ngSubmit)="add_code_website(url_section_form.value)">
+            <form [formGroup]="url_section_form" class="url_details" (ngSubmit)="add_code_website(url_section_form.value, SecondSection)">
                 <h2 class="url_details_title">Provide the Website URL</h2>
                 <div style="display: flex; justify-content: center;">
-                    <input formControlName="enter_website"  placeholder="https://www.facebook.com/" class="url_details_input" />
+                    <input (click)="transitionBack()" [@openClose]="firstSection" formControlName="enter_website"  placeholder="https://www.facebook.com/" class="url_details_input" />
                 </div>
                                   
                 <div class="url_details_btn">
-                    <button type="submit" class="next_btn">Next</button>
+                    <button type="submit" class="next_btn" >Next</button>
                 </div>              
             </form>
         </div>
@@ -73,7 +73,7 @@
     </div>
 
     <!--Section 2: Commands area/sections-->
-    <div class="automate_section" style="padding-right: 20px;">      
+    <div #SecondSection class="automate_section" style="padding-right: 20px;">      
         <div class="left" style="display: block;">
             <div class="automate_section_grid" style="grid-template-rows: minmax(auto, 9vh) minmax(auto, auto) minmax(auto, 60vh);">
                 <h2 class="automation_step_title">
@@ -113,12 +113,7 @@
             </div>
             <img class="websiteimg2" alt="image" src="/assets/ai.png"/>
         </div>    
-        <div class="right"  style="display: block;">
-
-            <!--Tasks-->
-            <!--4. Ensure that when a saved bot is loaded, it will show a red dot whenever it has been
-                    edited to remind users to save. And also a popup box warning them if they didn't-->
-            
+        <div class="right"  style="display: block;">           
             
             <div class="automate_section_grid">
                
@@ -129,13 +124,13 @@
                 <h2 class="automate_details_title">Addings Steps To Automation</h2>
 
                 <!--Section 2 Input fields form-->
-                <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code(automation_section_form.value)">
+                <form [formGroup]="automation_section_form" class="automate_details" (ngSubmit)="add_code(automation_section_form.value, FirstSection)">
                     <div style="padding-bottom: 30px; text-align: center;">
-                        <input formControlName="enter_input" *ngIf="selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the code element to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
+                        <input (click)="transitionBack()" [@openClose]="secondSection" formControlName="enter_input" *ngIf="selected_option === 'TXT' || selected_option === 'CLICK'" placeholder="Name of the code element to focus on. E.g. input[name=email]" class="automate_details_input input_input" />
 
-                        <input formControlName="enter_path"  *ngIf="selected_option === 'SS'"  placeholder="Screenshot file name E.g. imgname123" class="automate_details_input input_path" />
+                        <input (click)="transitionBack()" [@openClose]="secondSection" formControlName="enter_path"  *ngIf="selected_option === 'SS'"  placeholder="Screenshot file name E.g. imgname123" class="automate_details_input input_path" />
                         <br><br>
-                        <input formControlName="enter_text" *ngIf="selected_option === 'TXT'"  placeholder="Input text E.g. 'Hello! It's me!'" class="automate_details_input input_text" />
+                        <input (click)="transitionBack()" [@openClose]="secondSection" formControlName="enter_text" *ngIf="selected_option === 'TXT'"  placeholder="Input text E.g. 'Hello! It's me!'" class="automate_details_input input_text" />
                     </div>
            
                     <div class="automate_selection_grid">

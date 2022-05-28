@@ -70,7 +70,6 @@ export class AuthenticationService {
         }
         //console.log(userData);
         if(!this.userService.userExists(userData.email)){
-          console.log("User doesn't exists");
           this.userService.create(userData, result.user?.uid);
           return;
         }
@@ -95,7 +94,7 @@ export class AuthenticationService {
       localStorageData.displayName = profile.displayName;
       localStorage.setItem('user',JSON.stringify(localStorageData));
 
-      console.log("Updated profile")
+      console.log("Updated profile");
     })).catch((err=>{
       console.log("Auth: "  +err);
     }));

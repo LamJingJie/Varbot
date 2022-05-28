@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomValidation } from '../../../class/custom-validation';
 import { AuthenticationService } from '../../../service/authentication.service';
@@ -14,7 +15,7 @@ import { UserService, User } from '../../../service/user.service';
 export class SignupComponent implements OnInit {
   
   signup_form: FormGroup;
-  constructor( public afAuth: AngularFireAuth, private authService: AuthenticationService, private userService: UserService, private formBuilder: FormBuilder , public activeModal: NgbActiveModal) {
+  constructor(private snackBar: MatSnackBar, public afAuth: AngularFireAuth, private authService: AuthenticationService, private userService: UserService, private formBuilder: FormBuilder , public activeModal: NgbActiveModal) {
  
     this.signup_form = this.formBuilder.group(
       {
@@ -64,22 +65,19 @@ export class SignupComponent implements OnInit {
     }
     //console.log(userData);
     this.authService.SignUp(val.email, userData, val.password).then(()=>{
+      this.popup_msg("Account Created!");
       this.closeModal();
     });
   }
 
-
+  popup_msg(msg: string){
+    this.snackBar.open(msg,"Close", {duration: 5000, panelClass: "popup_msg"})
+  }
 
   closeModal() {
     this.activeModal.close();
     //console.log('close');
   }
-
-  test(){
-    console.log(this.authService.isLoggedIn);
-    console.log(this.authService.loginUserDetail);
-  }
-
 
   get name() { return this.signup_form.get('name'); }
   get email() { return this.signup_form.get('email'); }

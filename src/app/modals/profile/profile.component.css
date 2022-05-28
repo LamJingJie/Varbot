@@ -1,7 +1,20 @@
 .modal-header{
     margin: auto;
-    padding: 0;
-    padding-top: 5px;
+    padding: 8px;
+}
+
+.modal-title{
+    margin:auto;
+}
+
+.modal-body{
+    width: 100%;
+    text-align: center;
+}
+
+.field{
+    width: 80%;
+    padding: 5px;
 }
 
 .unselected:hover{

@@ -5,6 +5,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '../../../service/authentication.service';
 import { UserService, User } from '../../../service/user.service';
 import { ForgotPasswordComponent } from "../../modals/forgot-password/forgot-password.component";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import { ForgotPasswordComponent } from "../../modals/forgot-password/forgot-pas
 })
 export class LoginComponent implements OnInit {
   login_form: FormGroup;
-  constructor(private modalService: NgbModal, private authService: AuthenticationService, private formBuilder: FormBuilder, public activeModal: NgbActiveModal) {
+  constructor(private snackBar: MatSnackBar, private modalService: NgbModal, private authService: AuthenticationService, private formBuilder: FormBuilder, public activeModal: NgbActiveModal) {
 
     this.login_form = this.formBuilder.group({
     
@@ -45,13 +46,15 @@ export class LoginComponent implements OnInit {
     
     //console.log(userData);
     this.authService.login(val.email, val.password).then((res=>{
+      this.popup_msg("Logged In");
       this.closeModal();
     }));
   }
 
   google(){
     this.authService.GoogleAuth().then((res=>{
-      console.log("Google Login")
+      //console.log("Google Login");
+      this.popup_msg("Logged In By Google");
       this.closeModal();
     }));
   }
@@ -79,6 +82,10 @@ export class LoginComponent implements OnInit {
 
   get email() { return this.login_form.get('email'); }
   get password() { return this.login_form.get('password'); }
+
+  popup_msg(msg: string){
+    this.snackBar.open(msg,"Close", {duration: 5000, panelClass: "popup_msg"})
+  }
 
   closeModal() {
     this.activeModal.close();

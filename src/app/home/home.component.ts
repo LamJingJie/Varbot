@@ -20,14 +20,29 @@ import  Bot  from 'src/service/bot-service.service';
 
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { transition, trigger, animate, keyframes, style, state } from '@angular/animations';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger("openClose", [
+      state("false", style({ borderColor: "" })),
+      state("true", style({ borderColor: "red" })),
+      transition("false=>true", [animate("0.3s 0s ease-in")]),
+      transition("true=>false", [animate("0.3s 0s ease-out")])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
+  //Animation
+  //False = 'transition to red'
+  //True = 'transition back to nth'
+  firstSection = false;
+  secondSection = false;
+
   url_section_form = new FormGroup({
     enter_website: new FormControl(''),
   });
@@ -119,8 +134,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
   //Section 1
-  add_code_website(val: any){
+  add_code_website(val: any, el:HTMLElement){
     //console.log(val['enter_website']);
     
     if(val['enter_website'] === null || val['enter_website'] === ""){
@@ -150,6 +166,8 @@ export class HomeComponent implements OnInit {
     this.highlight_steps(last_index);
     this.changes = true;
     addEventListener("beforeunload", this.beforeUnloadListener, {capture: true});
+    el.scrollIntoView({behavior:"smooth"});
+    this.secondSection = true;
     //this.set_Style_For_Instruction_Steps_Last_Item();
     //console.log(this.bot_code_name);
     //console.log(this.bot_codes);
@@ -160,11 +178,14 @@ export class HomeComponent implements OnInit {
   }
 
   //Section 2
-  async add_code(val: any){
+  async add_code(val: any, el:HTMLElement){
     //console.log(val);
     //console.log(this.selected_option);
     if(this.bot.lists_code!.length <= 0){
       this.popup_msg("Please provide the WEBSITE URL to continue.");
+      el.scrollIntoView({behavior:"smooth"});
+      this.secondSection = false;
+      this.firstSection = true;
       return
     }
 
@@ -289,7 +310,7 @@ export class HomeComponent implements OnInit {
 
     deleteModalRef.componentInstance.fromParent = data;
     deleteModalRef.result.then(async (result) => {
-      console.log(result);
+      //console.log(result);
       
       if(result === null || result === '' || result === undefined){
         return;
@@ -551,6 +572,20 @@ export class HomeComponent implements OnInit {
     }).catch((err => {
       this.popup_msg(err);
     }));
+  }
+
+  //Scrolll to 1st section
+  scrollToDestination1st(el: HTMLElement){
+    console.log(el);
+    el.scrollIntoView({behavior:"smooth"});
+    this.firstSection = true;
+  }
+
+
+
+  transitionBack(){
+    this.firstSection = false;
+    this.secondSection = false;
   }
 
   logout(){

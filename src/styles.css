@@ -57,6 +57,11 @@ html, body{
     max-height: 70%;
 }
 
+/*Profile modal*/
+.profileModalClass div .modal-content{
+  height: fit-content;
+}
+
 .firstSave div .modal-content{
   height: fit-content;
 }
@@ -78,6 +83,9 @@ html, body{
   background: white;
 }
 
+.field .mat-form-field-wrapper .mat-form-field-flex .mat-form-field-underline{
+  border: none;
+}
 
 /*Forgot password modal*/
 /*.ForgotPasswordModalClass div .modal-content{
