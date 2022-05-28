@@ -30,11 +30,11 @@ export class AppComponent {
       console.log(data.name);
     }));*/
 
-    this.store.collection('test').doc('docidtest').valueChanges().subscribe(res=>{
+    /*this.store.collection('test').doc('docidtest').valueChanges().subscribe(res=>{
       
       this.data12 = res;
       console.log(this.data12.name);
-    });
+    });*/
 
   }
 
@@ -42,9 +42,9 @@ export class AppComponent {
    // const browser = puppeteer.launch();
   }
 
-  botbtn(){
+  /*botbtn(){
     this.botsService.runBots(this.bot_codes).then((result: any)=>{
       console.log(result);
     });
-  }
+  }*/
 }

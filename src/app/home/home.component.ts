@@ -487,6 +487,7 @@ export class HomeComponent implements OnInit {
         //console.log(result);
         //console.log(this.bot_id);
         this.bot = result;
+        this.changes = false;
 
         //highlight latest step
         if(this.bot.lists_code?.length! > 0){
@@ -500,7 +501,7 @@ export class HomeComponent implements OnInit {
       }));
   }
 
-  //Creates a new slate
+  //Creates a brand new slate
   new(){
     window.location.reload();
   }
@@ -514,7 +515,6 @@ export class HomeComponent implements OnInit {
 
   //Account related
   account() {
-    //#1: Show both their bots and name changing option in a modal
     console.log('account');
     const accoutnModalRef = this.modalService.open(ProfileComponent,
       {
@@ -523,10 +523,10 @@ export class HomeComponent implements OnInit {
       });
 
     accoutnModalRef.result.then(async (result) => {
-      console.log(result);
+      //console.log(result);
 
     }, (reason) => {
-      console.log(reason);
+      //console.log(reason);
     }).catch((err => {
       this.popup_msg(err);
     }));
@@ -535,7 +535,6 @@ export class HomeComponent implements OnInit {
   login(){
     console.log('login');
     //this.popup_msg('Logged In Successfully');
-    //LoginComponent
     const LoginModalRef = this.modalService.open(LoginComponent,
       {
         scrollable: true,
@@ -543,10 +542,10 @@ export class HomeComponent implements OnInit {
       });
 
       LoginModalRef.result.then(async (result) => {
-      console.log(result);
+      //console.log(result);
 
     }, (reason) => {
-      console.log(reason);
+      //console.log(reason);
     }).catch((err => {
       this.popup_msg(err);
     }));
@@ -564,11 +563,11 @@ export class HomeComponent implements OnInit {
       });
 
       SignupModalRef.result.then(async (result) => {
-      console.log(result);
+      //console.log(result);
 
 
     }, (reason) => {
-      console.log(reason);
+      //console.log(reason);
     }).catch((err => {
       this.popup_msg(err);
     }));
@@ -589,7 +588,7 @@ export class HomeComponent implements OnInit {
   }
 
   logout(){
-    console.log('logout');
+    //console.log('logout');
     this.popup_msg('Logged Out Successfully');
     this.authService.Signout();
   }

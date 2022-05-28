@@ -24,7 +24,7 @@ export class UserService {
 
    //Email is the Primary Key
    create(user: User, email_uid: any){
-     console.log('user service')
+    //console.log('user service')
     //this.db.database.ref('user/' + email).set(user);
     this.realtimeDB_list.set(email_uid, user);
    }

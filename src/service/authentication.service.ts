@@ -31,7 +31,8 @@ export class AuthenticationService {
 
   async login(email: string, password: string){
     return await this.afAuth.signInWithEmailAndPassword(email, password).catch((err=>{
-      window.alert(err.message);
+      //window.alert(err.message);
+      console.log(err.message)
     }))
   }
 
@@ -41,22 +42,18 @@ export class AuthenticationService {
     console.log(this.afAuth.currentUser);
     return await this.afAuth.createUserWithEmailAndPassword(email, password)
     .then((result)=>{
-      console.log(result.user?.uid);
-      console.log("Signed up");
+      //console.log(result.user?.uid);
+      //console.log("Signed up");
       this.updateProfile(userData);
       this.userService.create(userData, result.user?.uid);
     }).catch(err=>{
-      console.log(err);
-      window.alert(err.message);
+      console.log(err.message);
+      //window.alert(err.message);
     })
   }
 
   GoogleAuth(){
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      if (res) {
-        console.log("Signed up successfully");
-      }
-    });
+    return this.AuthLogin(new auth.GoogleAuthProvider());
   }
 
   // Auth logic to run auth providers (e.g. Google, Facebook, etc)
@@ -73,11 +70,11 @@ export class AuthenticationService {
           this.userService.create(userData, result.user?.uid);
           return;
         }
-        console.log("Welcome back!");
+        //console.log("Welcome back!");
         
       })
       .catch((error) => {
-        window.alert(error);
+        console.log(error);
       });
   }
 
@@ -94,7 +91,7 @@ export class AuthenticationService {
       localStorageData.displayName = profile.displayName;
       localStorage.setItem('user',JSON.stringify(localStorageData));
 
-      console.log("Updated profile");
+      //console.log("Updated profile");
     })).catch((err=>{
       console.log("Auth: "  +err);
     }));
