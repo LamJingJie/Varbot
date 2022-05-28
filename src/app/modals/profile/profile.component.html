@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h3 class="modal-title">Your Account</h3>
+    <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="email">
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Email:</mat-label>
+            <input class="unselected" [readonly]="true" matInput value="{{user.email}}">
+        </mat-form-field>
+        
+    </div>
+
+    <div class="name">
+        <mat-form-field class="field" appearance="fill">
+            <mat-label>Username:</mat-label>
+            <div style="display:flex;">
+                <input type="text" name="username" #username (change)="change()" matInput value="{{user.displayName}}">
+                <mat-icon *ngIf="edited" class="cursor" (click)="edit(username.value)">done</mat-icon>
+            </div>
+            
+        </mat-form-field>
+    </div>
+
+    <div class="dateCreated">
+        <mat-form-field class="field" appearance="fill" >
+            <mat-label>Account Created On:</mat-label>
+            <input class="unselected" [readonly]="true" matInput value="{{user.createdAt | date: 'short'}}">
+        </mat-form-field>
+        
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
+    
+</div>

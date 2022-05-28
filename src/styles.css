@@ -70,6 +70,14 @@ html, body{
   background: rgb(2, 215, 2);
 }
 
+.mat-list-text{
+  padding-right: 0px !important;
+}
+
+.field .mat-form-field-wrapper .mat-form-field-flex{
+  background: white;
+}
+
 
 /*Forgot password modal*/
 /*.ForgotPasswordModalClass div .modal-content{

@@ -1,10 +1,11 @@
+import * as auth from 'firebase/auth';
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFirestore,AngularFirestoreDocument, } from '@angular/fire/compat/firestore';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
-import { Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import * as auth from 'firebase/auth';
 import { User, UserService } from '../service/user.service';
+import { switchMap, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,9 @@ export class AuthenticationService {
   userData: any;
 
   constructor(private userService: UserService, public afAuth: AngularFireAuth,public ngZone: NgZone) {
-
-    //It to be run whenever there is a change in the user
+    //It to be triggered during sign-in/signout
     this.afAuth.authState.subscribe((user=>{
-      //console.log(user);
+     // console.log(user);
       if(user){
         localStorage.setItem('user', JSON.stringify(user));
         console.log("Logged in");
@@ -43,7 +43,7 @@ export class AuthenticationService {
     .then((result)=>{
       console.log(result.user?.uid);
       console.log("Signed up");
-      
+      this.updateProfile(userData);
       this.userService.create(userData, result.user?.uid);
     }).catch(err=>{
       console.log(err);
@@ -69,11 +69,38 @@ export class AuthenticationService {
           email: result.user?.email!
         }
         //console.log(userData);
-        this.userService.create(userData, result.user?.uid);
+        if(!this.userService.userExists(userData.email)){
+          console.log("User doesn't exists");
+          this.userService.create(userData, result.user?.uid);
+          return;
+        }
+        console.log("Welcome back!");
+        
       })
       .catch((error) => {
         window.alert(error);
       });
+  }
+
+  //Update auth profile data
+  async updateProfile(user: User){
+
+    const profile = {
+      displayName: user.name
+    }
+    return (await this.afAuth.currentUser)?.updateProfile(profile).then((res=>{
+
+      //update localstorage
+      let localStorageData =  JSON.parse(localStorage.getItem('user')!);
+      localStorageData.displayName = profile.displayName;
+      localStorage.setItem('user',JSON.stringify(localStorageData));
+
+      console.log("Updated profile")
+    })).catch((err=>{
+      console.log("Auth: "  +err);
+    }));
+    
+    
   }
 
   async resetPassword(email: string){

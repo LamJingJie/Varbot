@@ -27,12 +27,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from'@angular/material/icon';
 import { MatListModule } from '@angular/material/list'
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatInputModule} from '@angular/material/input';
 
 import { SignupComponent } from './modals/signup/signup.component';
 import { LoginComponent } from './modals/login/login.component';
 import { ForgotPasswordComponent } from './modals/forgot-password/forgot-password.component';
 import { FirstSaveComponent } from './modals/first-save/first-save.component';
 import { YourbotComponent } from './modals/yourbot/yourbot.component';
+import { ProfileComponent } from './modals/profile/profile.component';
 
 
 
@@ -46,6 +48,7 @@ import { YourbotComponent } from './modals/yourbot/yourbot.component';
     ForgotPasswordComponent,
     FirstSaveComponent,
     YourbotComponent,
+    ProfileComponent,
 
   ],
   entryComponents:[
@@ -60,6 +63,7 @@ import { YourbotComponent } from './modals/yourbot/yourbot.component';
     AngularFireModule.initializeApp(environment.firebaseConfig, 'varbot'),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    MatInputModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     HttpClientModule,

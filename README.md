@@ -18,12 +18,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 </tr>
 <tr>
   <td>
-    3. Add deleting of bots function
+    3. Add deleting of bots function (done)
   </td>
 </tr>
 <tr>
   <td>
-    4. Show modal consisting of email, creation date & username when clicked on user profile
+    4. Show modal consisting of email, creation date & username when clicked on user profile (done)
   </td>
 </tr>
 <tr>

@@ -1,3 +1,5 @@
+import * as firebase from 'firebase/app';
+
 export const environment = {
   production: true,
   firebaseConfig: {
@@ -9,3 +11,5 @@ export const environment = {
     messagingSenderId: "902443921444"
   }
 };
+
+firebase.initializeApp(environment?.firebaseConfig);

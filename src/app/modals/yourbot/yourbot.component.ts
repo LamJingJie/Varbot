@@ -5,6 +5,7 @@ import  Bot  from 'src/service/bot-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-yourbot',
@@ -15,7 +16,7 @@ export class YourbotComponent implements OnInit {
   @Input() fromParent: string | undefined;
   bots: any[] | undefined;
   getAll_Subscription: Subscription | undefined;
-  constructor(private botService: BotServiceService, public activeModal: NgbActiveModal,private formBuilder: FormBuilder,) { }
+  constructor(private snackBar: MatSnackBar, private botService: BotServiceService, public activeModal: NgbActiveModal,private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     
@@ -24,7 +25,7 @@ export class YourbotComponent implements OnInit {
       map(changes =>
         //gets the uid of each bot and add them into the objects in the array
         changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
+          ({ key: c.payload.key, ...c.payload.val() as Record<string, unknown> })
         )
       )
     ).subscribe(data => {
@@ -40,6 +41,16 @@ export class YourbotComponent implements OnInit {
     this.closeModal(data);
   }
 
+  delete(key: string, name: string){
+    if(confirm("Are you sure you want to delete " + "'" + name + "'?")){
+      this.botService.delete(key).then((res=>{
+        this.popup_msg(name + " Deleted")
+      })).catch((err=>{
+        console.log(err);
+      }));
+    }
+  }
+
   ngOnDestroy(){
     console.log("Destroy");
     if(this.getAll_Subscription){
@@ -48,6 +59,9 @@ export class YourbotComponent implements OnInit {
     
   }
 
+  popup_msg(msg: string){
+    this.snackBar.open(msg,"Close", {duration: 5000, panelClass: "popup_msg"})
+  }
 
 
   closeModal(val: any) {

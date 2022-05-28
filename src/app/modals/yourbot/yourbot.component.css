@@ -7,7 +7,7 @@
 
 .bot_grid{
     display: grid;
-    grid-template-columns: 1fr minmax(20%, 23%);
+    grid-template-columns: 1fr minmax(20%, 25%);
     grid-template-rows: minmax(0%, 3vh) minmax(0%, 6vh);
     
 }
@@ -39,3 +39,7 @@
     font-size: 12px;
 }
 
+.del:hover{
+    background-color: #5efabc;
+    border-radius: 20px;
+}

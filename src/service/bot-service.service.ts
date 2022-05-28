@@ -16,23 +16,12 @@ export default class Bot {
   providedIn: 'root'
 })
 export class BotServiceService {
-  realtimeDB_list: AngularFireList<Bot>;
   constructor(private authService: AuthenticationService, private store: AngularFirestore, private db: AngularFireDatabase) {
-    this.realtimeDB_list = db.list("user/" + this.authService.loginUserDetail.uid + "/bots", ref=> ref.orderByChild('last_saved')); //User
-    
-   
+
   }
 
-   /*Tasks
-    #1: Add login function (*tmr*)
-    #2: Add the CRUD function to DB (done)
-    #3: Add the save btn logo, replacing the text box
-    #4: Add "Saved" function that shows all saved bots
-    #5: Add popup box that ask the user to name the bot before saving
-  */
-
   getAll(){
-    return this.realtimeDB_list.snapshotChanges();
+    return this.db.list("user/" + this.authService.loginUserDetail.uid + "/bots", ref=> ref.orderByChild('last_saved')).snapshotChanges();
   }
 
   get(key: string){
@@ -42,15 +31,15 @@ export class BotServiceService {
   add(bot: Bot){
     console.log(bot);
     //this.testRef2.push({title: {0: '1', 1: '2'}});
-    return this.realtimeDB_list.push(bot);
+    return this.db.list("user/" + this.authService.loginUserDetail.uid + "/bots", ref=> ref.orderByChild('last_saved')).push(bot);
   }
 
   update(key: string, bot: Bot){
-    return this.realtimeDB_list.update(key, bot);
+    return this.db.list("user/" + this.authService.loginUserDetail.uid + "/bots", ref=> ref.orderByChild('last_saved')).update(key, bot);
   }
 
   delete(key: string){
-    return this.realtimeDB_list.remove(key);
+    return this.db.list("user/" + this.authService.loginUserDetail.uid + "/bots", ref=> ref.orderByChild('last_saved')).remove(key);
   }
 
   /*getAllBot(){

@@ -7,26 +7,32 @@
     </button>
 </div>
 <div class="modal-body">
-    <mat-selection-list  [multiple]="false">
-    <mat-list-option (click)="selectBot(bot)" style="border-bottom: 1px solid #59467D;" *ngFor="let bot of bots" [value]="bot">
-            <div class="bot_grid">
-                <div class="id">
-                    {{bot.key}}
-                </div>
-                <div class="name">
-                    {{bot.name}}
-                </div>
+    <mat-selection-list [multiple]="false">
+        <mat-list-option  style=" border-bottom: 1px solid #59467D;" *ngFor="let bot of bots"
+            [value]="bot">
+            <div style="display: flex;">
+                <div class="bot_grid" (click)="selectBot(bot)" style="flex:1;">
+                    <div class="id">
+                        {{bot.key}}
+                    </div>
+                    <div class="name">
+                        {{bot.name}}
+                    </div>
     
-                <div class="datetitle">
-                    Last Saved
+                    <div class="datetitle">
+                        Last Saved
+                    </div>
+                    <div class="date">
+                        {{bot.last_saved | date: 'short'}}
+                    </div>
+                    
                 </div>
-                <div class="date">
-                    {{bot.last_saved | date: 'short'}}
-                </div>         
-        </div>
+                <mat-icon class="del" (click)="delete(bot.key, bot.name)" >delete_outline</mat-icon>
+            </div>
+           
 
-    </mat-list-option>
-</mat-selection-list>
+        </mat-list-option>
+    </mat-selection-list>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal('close')">Close</button>

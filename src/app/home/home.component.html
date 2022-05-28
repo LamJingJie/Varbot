@@ -79,7 +79,7 @@
                 <h2 class="automation_step_title">
                         <div class="as_title_btn">
                             <button *ngIf="bot_id" (click)="new()">Create Brand New</button>                                   
-                            <button (click)="YourBots()">Your bots</button> 
+                            <button *ngIf="loggedIn" (click)="YourBots()">Your bots</button> 
                             <mat-icon *ngIf="bot.lists_code!.length > 0" (click)="Save()" matBadge="&#8288;" matBadgeSize="small" id="save_icon"  [ngClass] = "changes ? 'warn' :'green'">save</mat-icon>
                         </div>
                         <div class="as_title_desc">

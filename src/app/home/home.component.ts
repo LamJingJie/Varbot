@@ -4,12 +4,14 @@ import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-b
 import { BotsService } from '../shared/bots.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from "ngx-spinner";
-import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
-import { FirstSaveComponent } from "../modals/first-save/first-save.component";
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+
 import { LoginComponent } from "../modals/login/login.component";
 import { YourbotComponent } from "../modals/yourbot/yourbot.component";
 import { SignupComponent } from "../modals/signup/signup.component";
+import { DeleteModalComponent } from "../modals/delete-modal/delete-modal.component";
+import { FirstSaveComponent } from "../modals/first-save/first-save.component";
+import { ProfileComponent } from "../modals/profile/profile.component";
 
 //Services 
 import { BotServiceService } from 'src/service/bot-service.service';
@@ -69,11 +71,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(){
     document.getElementById('selection_click')?.focus();
     this.selection_btn('CLICK');
-    console.log(this.bot);
-
-    //Warn the user if there's any unsaved data
-    
-    
   }
 
   //Change btn background permanently when clicked.
@@ -462,6 +459,8 @@ export class HomeComponent implements OnInit {
         if (result === null || result === '' || result === undefined || result === 'close') {
           return;
         }
+
+
         this.bot_id = result.key;
         delete result.key 
         //console.log(result);
@@ -493,10 +492,23 @@ export class HomeComponent implements OnInit {
 
 
   //Account related
-  account(){
+  account() {
     //#1: Show both their bots and name changing option in a modal
     console.log('account');
-    console.log(this.authService.loginUserDetail);
+    const accoutnModalRef = this.modalService.open(ProfileComponent,
+      {
+        scrollable: true,
+        windowClass: 'profileModalClass'
+      });
+
+    accoutnModalRef.result.then(async (result) => {
+      console.log(result);
+
+    }, (reason) => {
+      console.log(reason);
+    }).catch((err => {
+      this.popup_msg(err);
+    }));
   }
 
   login(){

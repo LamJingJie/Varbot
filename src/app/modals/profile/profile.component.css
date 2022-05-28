@@ -1,0 +1,14 @@
+.modal-header{
+    margin: auto;
+    padding: 0;
+    padding-top: 5px;
+}
+
+.unselected:hover{
+    cursor: pointer;
+}
+
+.cursor:hover{
+    cursor: pointer;
+    color: rgb(4, 248, 4);
+}
