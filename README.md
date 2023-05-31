@@ -1,34 +1,23 @@
-# Varbot
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
 <br><br><br>
 
-<h2>Tasks</h2>
-<table>
-<tr>
-  <td>
-    1. Design the user profile modal(done)
-  </td>
-</tr>
-<tr>
-  <td>
-    2. Add popup msg for successful attempts in CRUD (done)
-  </td>
-</tr>
-<tr>
-  <td>
-    3. Added auto scrolldown to next section feature (done)
-  </td>
-</tr>
-</table>
+# Varbot
+#### Video Demo:  https://www.youtube.com/watch?v=Bs0v_3x1bRM
+#### Description: 
+This website allows users to create 'bots' using puppeteer as the 3rd party plugin to automate websites. Being able to save those 'bots' as well. Used Angular 12 as the frontend framework because angular is better suited for a single page website which is what I am going for. Used Express framework to have puppeteer work on the server-side by sending data through POST, as attempting to have puppeteer work on the client-side will not work due to security reasons. Used Realtime Firebase as my database as it has better latency than Cloud Firestore. Allowing for data to appear more 'realtime'. Used Puppeteer which is a 3rd-party plugin that allows for bot building and instructing. 
+
+I used localstorage to store the user's data locally rather than sessionstorage as in this context I wish to have to user always logged in until they choose otherwise. As logging them out every time the current instance is closed in this context is a bad user design and may irritate them. All my code is stored in the 'home' folder and everything else is just modals(popups) that appear when you click on a button on the website rather than a new page itself.
+
+I used firebase authentication to facilitate logging in and out. As they are more secure with better encryption than if I were to do it myself. Also allowing the user an option to log in using their google account, facebook account (not implemented), etc.
+
+The usage of the bot requires abit of knowledge regarding how to inspect an element on the website. And based on the element, class, etc. Make a decision on which one you want to automate. I am unable to find other plugins that does similar to this in this context, and so had to make do with this.
+
 
 <br><br><br>
 
-<h2>About</h2>
-- This website allows users to create 'bots' using puppeteer as the plugin to 
-  automate websites.
-<br>
+
 <table>
 <tr>
   <td>

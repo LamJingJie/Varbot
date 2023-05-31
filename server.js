@@ -35,7 +35,7 @@ app.get("/api/status", function (req, res) {
 
 */
 app.post("/api/bots", async function(req, res){
-    console.log("Reached to /api/bots");
+    //console.log("Reached to /api/bots");
     
     const fb_container = await bot(req.body).then((res2=>{
         res.status(200).json({ status: res2 });

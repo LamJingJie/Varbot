@@ -20,7 +20,7 @@ export class BotsService {
 
   //Making a call to the server's bot exposed endpoint
   async runBots(bot_codes: string[]): Promise<void | any> {
-    console.log(bot_codes);
+    //console.log(bot_codes);
     try {
       const response = await this.http.post(this.botsUrl, bot_codes)
         .toPromise();

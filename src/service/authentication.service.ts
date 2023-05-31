@@ -29,11 +29,9 @@ export class AuthenticationService {
    
   }
 
-  async login(email: string, password: string){
-    return await this.afAuth.signInWithEmailAndPassword(email, password).catch((err=>{
-      //window.alert(err.message);
-      console.log(err.message)
-    }))
+
+  login(email: string, password: string){
+    return this.afAuth.signInWithEmailAndPassword(email, password);
   }
 
 

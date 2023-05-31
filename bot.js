@@ -9,13 +9,13 @@ const chromeOptions = {
 
 async function bot(data_array){
     //eval();
-    console.log(data_array);
+    //console.log(data_array);
     //console.log(data_array.length);
     try {
         const browser = await puppeteer.launch(chromeOptions);
         const page = await browser.newPage();
     
-        console.log("Facebook javascript file!");
+        //console.log("Facebook javascript file!");
     
         /*await page.goto('https://touch.facebook.com/?_rdr', {
             waitUntil: 'networkidle0',

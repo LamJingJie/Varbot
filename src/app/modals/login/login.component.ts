@@ -42,12 +42,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(val: any){
-    console.log(val);
-    
-    //console.log(userData);
+
     this.authService.login(val.email, val.password).then((res=>{
-      this.popup_msg("Logged In");
+      
+      //console.log(res);
+      this.popup_msg("Logged In!");
       this.closeModal();
+    })).catch((err =>{
+      this.popup_msg("Incorrect Email or Password");
+      //console.log(err);
     }));
   }
 
@@ -70,14 +73,7 @@ export class LoginComponent implements OnInit {
         modalDialogClass:"modal-side modal-top-right"
       });
 
-      ForgotPasswordModalRef.result.then(async (result) => {
-      console.log(result);
-
-    }, (reason) => {
-      console.log(reason);
-    }).catch((err => {
-      console.log(err);
-    }));
+      
   }
 
   get email() { return this.login_form.get('email'); }
